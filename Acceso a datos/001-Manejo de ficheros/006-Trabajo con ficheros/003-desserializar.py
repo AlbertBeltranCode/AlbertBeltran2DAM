@@ -1,13 +1,13 @@
 import random
 import math
 import json
-# Declaro una clase Npc y le pongo dos sencillas propiedades x e y
+# Declaro una clase Npc y le pongo dos sencillas propiedades x e y ademas del angulo
 class Npc:
     def __init__(self,nuevax,nuevay,nuevoangulo):
         self.x = nuevax
         self.y = nuevay
         self.angulo = nuevoangulo
-# Creo una lista de 50 npcs
+# Creo una lista de npcs
 npcs = []
 
 # Leo del json

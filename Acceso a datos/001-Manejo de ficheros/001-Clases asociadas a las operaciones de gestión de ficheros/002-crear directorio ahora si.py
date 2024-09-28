@@ -1,6 +1,6 @@
-import os
+import os #Importamos la libreria del sitema
 
-os.makedirs("micarpeta")
+os.makedirs("micarpeta") #Creamos una carpeta
 
 
 

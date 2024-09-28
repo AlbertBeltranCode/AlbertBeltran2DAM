@@ -1,4 +1,4 @@
-archivo = open("archivo.txt",'w')
+archivo = open("archivo.txt",'w') #Creamos un nuevo archivo txt
 
 
 

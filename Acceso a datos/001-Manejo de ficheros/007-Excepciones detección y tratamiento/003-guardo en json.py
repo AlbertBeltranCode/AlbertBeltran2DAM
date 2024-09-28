@@ -1,12 +1,12 @@
 import json
 
-class Cliente:
+class Cliente: #Creamos una clase cliente con sus valores
     def __init__(self):
         self.nombre = None
         self.apellidos = None
         self.emails = {"personal":[],"profesional":[]}
 
-class Producto:
+class Producto: #Creamos una clase producto con sus valores
     def __init__(self):
         self.nombre = None
         self.precio = None
@@ -16,11 +16,11 @@ class Producto:
 clientes = []
 clientes.append(Cliente())
 
-clientes[-1].nombre = "Jose Vicente"
-clientes[-1].apellidos = "Carratalá Sanchis"
-clientes[-1].emails['profesional'].append("info@josevicentecarratala.com")
-clientes[-1].emails['profesional'].append("info@jocarsa.com")
-clientes[-1].emails['personal'].append("jocarsa2@gmail.com")
+clientes[-1].nombre = "Albert"
+clientes[-1].apellidos = "Beltran Carbonell"
+clientes[-1].emails['profesional'].append("albertbeltrancode@gmail.com")
+clientes[-1].emails['profesional'].append("albert@programacion.com")
+clientes[-1].emails['personal'].append("albert2@programacion.com")
 
 print(clientes[-1].emails)
 
