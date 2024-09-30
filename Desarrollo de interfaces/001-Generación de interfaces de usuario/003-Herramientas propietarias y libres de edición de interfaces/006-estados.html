@@ -3,40 +3,47 @@
   <head>
     <meta charset="utf-8">
     <style>
-    body{
-    transition:all 1s;
-    }
-      button{
-        width:100px; /* Anchura del botón  */
-        height:25px;  /* Altura del botón */
-        border:none; /* Le quito el border que HTML le pone por defecto */
-        border-radius:20px; /* Quiero un radio redondeado */
+      body {
+        transition: all 1s;
+      }
+
+      button {
+        width: 120px; /* Un poco más ancho */
+        height: 40px;  /* Altura más grande para más espacio */
+        border: none; /* Sin bordes */
+        border-radius: 10px; /* Bordes ligeramente redondeados */
         background-image: 
-        linear-gradient(rgb(0,0,255), rgb(200,200,255)); /* Gradiente desde azul arriba a azul clarito abajo */
-        position:relative; /* La posicion es relativa para dentro meterle un elemento absoluto */
-        box-shadow:0px 5px 4px rgba(0,0,0,0.3); /* Arrojo una pequeña sombra */
-        color:white; /* El color del texto es blanco */
-        text-shadow:0px 2px 4px black; /* El texto arroja una pequeña sombra */
-        
+        linear-gradient(135deg, #f0f0f0, #cccccc); /* Gradiente suave desde gris claro a un gris un poco más oscuro */
+        position: relative; /* Posición relativa para el brillo */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        color: #333; /* Texto en color oscuro */
+        font-family: 'Arial', sans-serif; /* Tipografía simple */
+        font-size: 14px; /* Tamaño de texto */
+        cursor: pointer; /* Cambia a mano al pasar el ratón */
+        padding: 8px; /* Un poco de espacio interno */
+        transition: background-image 0.3s, box-shadow 0.3s; /* Transiciones suaves para el hover */
       }
-      button:hover{
+
+      button:hover {
         background-image: 
-        linear-gradient(rgb(200,200,255), rgb(0,0,255));
+        linear-gradient(135deg, #cccccc, #f0f0f0); /* Inversión del gradiente al hacer hover */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más intensa en hover */
       }
-      button:active{
-        box-shadow:0px 0px 4px rgba(0,0,0,0.3); /* Arrojo una pequeña sombra */
+
+      button:active {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más pequeña al hacer click */
       }
-      #brillo{
-        width:96px; /* El brillo es un poco menos ancho que el boton */
-        height:21px; /* El brillo es un poco menos alto que el boton */
-        top:2px; /* Tiene un margen superior de 2 pixeles */
-        left:2px; /* tiene un margen izquierdo de dos pixeles */
-        border-radius:20px; /* Está redondeado */
-        position:absolute; /* Su posición es absoluta dentro del boton */
+
+      #brillo {
+        width: 116px; /* El brillo es ligeramente más pequeño que el botón */
+        height: 36px; /* Altura ligeramente más pequeña */
+        top: 2px; /* Un margen superior pequeño */
+        left: 2px; /* Un margen izquierdo pequeño */
+        border-radius: 10px; /* Bordes redondeados */
+        position: absolute; /* Posición absoluta dentro del botón */
         background-image:  
-        linear-gradient(rgba(255,255,255,0.8),  
-        rgba(255,255,255,0.5), 
-        rgba(255,255,255,0.0)); /* Tiene un gradiente blanco */
+        linear-gradient(rgba(255, 255, 255, 0.5),  
+                        rgba(255, 255, 255, 0.0)); /* Gradiente de brillo sutil */
       }
     </style>
     
@@ -44,7 +51,7 @@
   <body>
     <button>
       <div id="brillo"></div>
-      Púlsame
+      Dame Click
     </button>
     
   </body>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Estilo para el fondo negro */
+    .fondo {
+      background-color: #9093ee;  /* Color de fondo negro */
+      width: 140px;             /* Ancho del fondo */
+      height: 50px;             /* Alto del fondo */
+      display: flex;            /* Usar flexbox para centrar el contenido */
+      align-items: center;      /* Centrar verticalmente */
+      justify-content: left;  /* Centrar horizontalmente */
+      border-radius: 5px;      /* Bordes redondeados */
+    }
+
+    .checkbox-label {
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #add8e6; /* Azul clarito */
+      color: black;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.3s ease, transform 0.3s ease; /* Transición de color y movimiento */
+    }
+
+    .checkbox-input {
+      display: none; /* Ocultamos el checkbox real */
+    }
+
+    .checkbox-input:checked + .checkbox-label {
+      background-color: #90ee90; /* Verde clarito cuando está seleccionado */
+      transform: translateX(60px); /* Mueve el botón 20px a la derecha */
+    }
+  </style>
+</head>
+<body>
+  <div class="fondo"> <!-- Cambié el ID a clase para aplicar estilos -->
+    <input type="checkbox" id="checkbox" class="checkbox-input">
+    <label for="checkbox" class="checkbox-label">Clickame</label>
+  </div>
+</body>
+</html>

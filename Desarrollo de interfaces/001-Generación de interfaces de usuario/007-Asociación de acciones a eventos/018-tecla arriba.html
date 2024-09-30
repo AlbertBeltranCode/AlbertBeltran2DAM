@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
-  <body>
+  <body> <!-- Aquí recogemos que se ha pulsado la tecla cuando la soltamos -->
     <input>
     <script>
       const entrada = document.querySelector("input")
       entrada.onkeyup = function(e){
-        console.log("has pulsado una tecla")
+        console.log("has soltado una tecla")
         console.log(e.key)
       }
     </script>

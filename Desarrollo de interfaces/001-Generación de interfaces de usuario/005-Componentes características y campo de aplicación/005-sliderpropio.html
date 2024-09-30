@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 50px;
+                font-family: Arial, sans-serif;
+            }
+
+            .slider {
+                -webkit-appearance: none; /* Elimina el estilo por defecto del slider */
+                width: 300px; /* Ancho del slider */
+                height: 15px; /* Alto del slider */
+                background: #ddd; /* Color de fondo del slider */
+                border-radius: 5px; /* Bordes redondeados */
+                outline: none; /* Elimina el borde al hacer foco */
+            }
+
+            .slider:hover {
+                background: #ccc; /* Color de fondo al pasar el mouse */
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none; /* Elimina el estilo por defecto del thumb */
+                appearance: none; /* Elimina el estilo por defecto del thumb */
+                width: 20px; /* Ancho del thumb */
+                height: 20px; /* Alto del thumb */
+                border-radius: 50%; /* Bordes redondeados */
+                background: #4caf50; /* Color del thumb */
+                cursor: pointer; /* Cambia el cursor al pasar sobre el thumb */
+            }
+
+            .slider::-moz-range-thumb {
+                width: 20px; /* Ancho del thumb */
+                height: 20px; /* Alto del thumb */
+                border-radius: 50%; /* Bordes redondeados */
+                background: #4caf50; /* Color del thumb */
+                cursor: pointer; /* Cambia el cursor al pasar sobre el thumb */
+            }
+
+            .value {
+                margin-top: 10px; /* Margen superior para separar el valor del slider */
+                font-size: 20px; /* Tamaño de la fuente */
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Creacion de un slider</h1>
+        <input type="range" min="0" max="100" value="50" class="slider" id="mySlider" />
+        <div class="value">Valor: <span id="sliderValue">50</span></div>
+
+        <!-- Elemento de audio -->
+        <audio id="myAudio">
+            <source src="cancion.mp3" type="audio/mpeg" />
+            <!-- Reemplaza con la ruta de tu canción -->
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+
+        <script>
+            const slider = document.getElementById("mySlider");
+            const output = document.getElementById("sliderValue");
+            const audio = document.getElementById("myAudio");
+
+            // Actualiza el valor mostrado cuando se mueve el slider
+            slider.oninput = function () {
+                output.innerHTML = this.value; // Muestra el valor actual del slider
+                // Verifica si el valor es 100
+                if (this.value == 100) {
+                    output.innerHTML = "Has llegado al maximo";
+                } else if (this.value == 5) {
+                    output.innerHTML = "Has encontrado mi numero de la suerte"; // Muestra la alerta
+                }
+                
+                if (this.value == 69) {
+                audio.play(); // Reproduce la canción
+                    } else {
+                audio.pause(); // Pausa la canción
+                audio.currentTime = 0; // Reinicia la canción al inicio
+            }
+            };
+        </script>
+    </body>
+</html>

@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
   <body>
-    <button>Pulsame</button>
+    <!--Aqui creamos un boton -->
+    <button>Mueve el raton por la pantalla</button>
     <script>
-      let boton = document.querySelector("button")
-      boton.onmousemove = function(){
-        console.log("Te estas moviendo")
-      }
+      <!--Aqui le damos funcionalidad cuando movemos el raton-->
+      let boton = document.querySelector("button");
+      boton.onmousemove = function () {
+        console.log("Te estas moviendo"); <!-- Mostrando un texto en consola -->
+      };
     </script>
   </body>
 </html>

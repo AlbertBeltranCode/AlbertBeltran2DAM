@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
   <body>
-    <button>Pulsame</button>
+    <!--Aqui creamos un boton -->
+    <button>Pon el raton encima mio</button>
     <script>
-      let boton = document.querySelector("button")
-      boton.onmouseenter = function(){
-        console.log("Has entrado")
-      }
+      <!--Aqui le damos funcionalidad cuando pasamos el raton por encima-->
+      let boton = document.querySelector("button");
+      boton.onmouseenter = function () {
+        console.log("Estas encima del boton"); <!-- Mostrando un texto en consola -->
+      };
     </script>
   </body>
 </html>

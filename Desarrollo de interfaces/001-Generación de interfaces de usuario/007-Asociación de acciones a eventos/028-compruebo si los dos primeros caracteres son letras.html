@@ -2,29 +2,43 @@
 <html>
   <body>
     <input class="iban">
+    <div id="mensaje"></div> <!-- Div para mostrar el mensaje -->
+
     <script>
-    function isLetter(char) {
-      return /^[a-zA-Z]$/.test(char);
-    }
-      const entrada = document.querySelector("input")
-      entrada.onchange = function(e){
-        let contenido = this.value;
-        for(let i = 0;i<contenido.length;i++){
-          if(
-            contenido[4] == " " 
-            && contenido[9] == " " 
-            && contenido[14] == " " 
-            && contenido[19] == " "
-            && isLetter(contenido[0])
-            && isLetter(contenido[1])
-          ){
-            this.style.background = "rgb(200,255,200)"
-          }else{
-            this.style.background = "rgb(255,200,200)"
-          }
+      function isLetter(char) {
+        return /^[a-zA-Z]$/.test(char); // Verifica si el carácter es una letra
+      }
+
+      const entrada = document.querySelector("input");
+      entrada.onchange = function(e) {
+        let contenido = this.value; // Obtiene el valor del input
+
+        // Selecciona el div donde se mostrará el mensaje
+        const mensajeDiv = document.getElementById("mensaje");
+        mensajeDiv.innerHTML = ""; // Limpia el mensaje anterior
+
+        // Verifica las condiciones para determinar si es un IBAN correcto
+        if (
+          contenido[4] == " " && 
+          contenido[9] == " " && 
+          contenido[14] == " " && 
+          contenido[19] == " " &&
+          isLetter(contenido[0]) &&
+          isLetter(contenido[1])
+        ) {
+          this.style.background = "rgb(200,255,200)"; // Establece el fondo a verde claro
+
+          // Crea un nuevo elemento <p>
+          const mensaje = document.createElement("p");
+          mensaje.textContent = "Esto es un IBAN correcto"; // Establece el texto del <p>
+
+          // Añade el <p> al div de mensaje
+          mensajeDiv.appendChild(mensaje);
+        } else {
+          this.style.background = "rgb(255,200,200)"; // Establece el fondo a rojo claro
+          mensaje.textContent = "Esto es un IBAN incorrecto"; // Establece el texto del <p>
         }
       }
     </script>
   </body>
 </html>
-

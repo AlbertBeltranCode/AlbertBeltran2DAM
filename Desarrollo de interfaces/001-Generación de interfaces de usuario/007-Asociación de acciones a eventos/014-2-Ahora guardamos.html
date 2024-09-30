@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- Aquí creamos un lienzo que más adelante utilizaremos -->
+    <style>
+      canvas {
+        border: 1px solid grey;
+      }
+    </style>
+    <!-- Aquí creamos botones uno para dibujar, otro para borrar y otro para guardar -->
+    <button class="herramienta" id="dibujar">Dibujar</button>
+    <button class="herramienta" id="borrar">Borrar</button>
+    <button class="herramienta" id="guardar">Guardar como PNG</button>
+    
+    <!-- Selector de opciones para los diferentes tamaños de la brocha -->
+    <input type="color" id="color">
+    <select id="radio">
+      <option value=1>1</option>
+      <option value=2>2</option>
+      <option value=3>3</option>
+      <option value=4>4</option>
+      <option value=5>5</option>
+      <option value=6>6</option>
+      <option value=7>7</option>
+      <option value=8>8</option>
+      <option value=9>9</option>
+      <option value=10>10</option>
+    </select>
+    
+    <canvas></canvas>
+    
+    <script>
+      var operacion = "dibujar";
+      var radio = 1;
+      var pulsado = false; // De entrada no estoy pulsando el ratón
+      
+      document.onmousedown = function() { pulsado = true; }; // Cuando pulso el botón izquierdo
+      document.onmouseup = function() { pulsado = false; }; // Cuando despulso
+      
+      const lienzo = document.querySelector("canvas"); // Atrapo el lienzo
+      const contexto = lienzo.getContext("2d"); // Atrapo el contexto
+      contexto.fillStyle = "black";
+      lienzo.width = 512; // Le doy anchura al lienzo
+      lienzo.height = 512; // Le doy altura al lienzo
+      
+      lienzo.onmousemove = function(e) { // Cuando mueva el ratón por el lienzo
+        if (pulsado) { // Si tengo el ratón pulsado
+          if (operacion == "dibujar") {
+            contexto.fillRect(e.offsetX, e.offsetY, radio, radio); // Dibuja en la pantalla
+          } else {
+            contexto.clearRect(e.offsetX, e.offsetY, radio, radio);
+          }
+        }
+      };
+
+      document.getElementById("color").onchange = function() { // Cuando cambie el valor del color
+        contexto.fillStyle = this.value; // El color del contexto es el color del input
+      };
+
+      document.getElementById("radio").onchange = function() { // Cuando cambie el valor del tamaño
+        radio = this.value; // Cambia el tamaño del lápiz
+      };
+
+      document.getElementById("dibujar").onclick = function() { // Cambia a modo dibujar
+        operacion = "dibujar";
+      };
+
+      document.getElementById("borrar").onclick = function() { // Cambia a modo borrar
+        operacion = "borrar";
+      };
+
+      // Función para guardar la imagen del canvas
+      document.getElementById("guardar").onclick = function() {
+        const dataURL = lienzo.toDataURL("image/png"); // Convierte el canvas a una imagen PNG
+
+        // Crea un enlace temporal para descargar la imagen
+        const a = document.createElement("a");
+        a.href = dataURL;
+        a.download = "imagenes pintadas/mi_dibujo.png"; // Nombre del archivo
+
+        // Simula un clic en el enlace para descargar la imagen
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+    </script>
+  </body>
+</html>

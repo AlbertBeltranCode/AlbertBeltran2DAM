@@ -1,5 +1,5 @@
-import tkinter as tk
+import tkinter as tk #Importamos la libreria tkinter para poder trabajar con interfaces
 
-ventana = tk.Tk()
+ventana = tk.Tk() #Creamos una ventana mediante la funcion TK()
 
-ventana.mainloop()
+ventana.mainloop()  # Inicia la ventana principal

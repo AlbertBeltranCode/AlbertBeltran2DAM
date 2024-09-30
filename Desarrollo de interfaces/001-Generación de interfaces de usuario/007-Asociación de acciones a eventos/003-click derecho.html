@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
   <body>
-    <button>Pulsame</button>
+    <!--Aqui creamos un boton -->
+    <button>Dame Click</button>
     <script>
-      let boton = document.querySelector("button")
-      boton.oncontextmenu = function(){
-        console.log("Me has pulsado")
-      }
+      <!--Aqui le damos funcionalidad cuando pulsamos el boton con el click derecho-->
+      let boton = document.querySelector("button");
+      boton.oncontextmenu = function () {
+        console.log("Me has dado click"); <!-- Mostrando un texto en consola -->
+      };
     </script>
   </body>
 </html>

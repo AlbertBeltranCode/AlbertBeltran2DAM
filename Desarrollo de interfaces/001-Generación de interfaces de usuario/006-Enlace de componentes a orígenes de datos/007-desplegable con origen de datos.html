@@ -3,18 +3,18 @@
   <head>
   </head>
   <body>
-    <select id="personas">
-      <option>Selecciona a una persona</option>
+    <select id="jugadores">
+      <option>Selecciona a un jugador del Levante</option>
     </select>
     <script>
-      fetch("personas.json")
+      fetch("jugadores.json")
       .then(response => response.json())
       .then(function(response){
         console.log(response)
-        response['personas'].forEach(function(currentValue) {
+        response['jugadores'].forEach(function(currentValue) {
           let option = document.createElement("option");
           option.textContent = currentValue;
-          document.querySelector("#personas").appendChild(option);
+          document.querySelector("#jugadores").appendChild(option);
         });
       })
     </script>
