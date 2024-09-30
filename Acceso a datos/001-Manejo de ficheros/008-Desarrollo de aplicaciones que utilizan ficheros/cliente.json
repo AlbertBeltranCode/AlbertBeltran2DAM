@@ -1,8 +1,8 @@
 {
-    "nombre": "Jaimito",
-    "apellidos": "Lopez",
+    "nombre": "Albert",
+    "apellidos": "Beltran",
     "emails": {
-        "personal": "jaimito@lopez.com",
-        "profesional": "jaimito@empresa.com"
+        "personal": "albert@correo.com",
+        "profesional": "albertito@empresa.com"
     }
 }

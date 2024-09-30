@@ -1,0 +1,8 @@
+{
+    "nombre": "Pedrito",
+    "apellidos": "Piedra",
+    "emails": {
+        "personal": "pedrito@piedra.com",
+        "profesional": "pedrito@empresa.com"
+    }
+}

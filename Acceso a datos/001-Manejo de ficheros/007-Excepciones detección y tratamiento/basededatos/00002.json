@@ -1,13 +1,13 @@
 {
-    "nombre": "Jorge",
-    "apellidos": "Lopez martinez",
+    "nombre": "Pedro",
+    "apellidos": "Gonzalez Aguado",
     "emails": {
         "personal": [
-            "jorge@gmail.com"
+            "pedro@gmail.com"
         ],
         "profesional": [
-            "jorge@josevicentecarratala.com",
-            "jorge@jocarsa.com"
+            "pedro@correo.com",
+            "pedro@gmail.com"
         ]
     }
 }

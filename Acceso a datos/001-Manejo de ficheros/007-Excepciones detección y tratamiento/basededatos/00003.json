@@ -1,8 +1,8 @@
 {
-    "nombre": "Jose Vicente",
-    "apellidos": "Carratala",
+    "nombre": "Albert",
+    "apellidos": "Beltran",
     "emails": {
-        "personal": "info@jocarsa.com",
-        "profesional": "jocarsa2@gmail.com"
+        "personal": "albert@correo.com",
+        "profesional": "albertito@gmail.com"
     }
 }

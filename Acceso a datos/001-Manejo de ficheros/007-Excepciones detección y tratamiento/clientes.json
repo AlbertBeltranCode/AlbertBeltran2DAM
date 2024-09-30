@@ -1,13 +1,13 @@
 {
-    "nombre": "Jose Vicente",
-    "apellidos": "Carratal\u00e1 Sanchis",
+    "nombre": "Albert",
+    "apellidos": "Beltran Carbonell",
     "emails": {
         "personal": [
-            "jocarsa2@gmail.com"
+            "albert2@programacion.com"
         ],
         "profesional": [
-            "info@josevicentecarratala.com",
-            "info@jocarsa.com"
+            "albertbeltrancode@gmail.com",
+            "albert@programacion.com"
         ]
     }
 }

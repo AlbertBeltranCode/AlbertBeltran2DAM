@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <cliente>
-<nombre>Jaimito</nombre>
-<apellidos>Lopez</apellidos>
+<nombre>Albert</nombre>
+<apellidos>Beltran</apellidos>
 <emails>
-{'personal': 'jaimito@lopez.com', 'profesional': 'jaimito@empresa.com'}
+{'personal': 'albert@correo.com', 'profesional': 'albertito@empresa.com'}
 </emails>
 </cliente>
