@@ -1,19 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <!-- Aquí creamos un lienzo que más adelante utilizaremos -->
-    <style>
-      canvas {
-        border: 1px solid grey;
-      }
-    </style>
-    <!-- Aquí creamos botones uno para dibujar, otro para borrar y otro para guardar -->
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .herramienta {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .herramienta:hover {
+      background-color: #45a049;
+    }
+
+    #color {
+      margin-left: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    select {
+      padding: 5px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    canvas {
+      border: 2px solid #999;
+      background-color: white;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .toolbar {
+      margin-bottom: 20px;
+    }
+
+    #guardar {
+      background-color: #008CBA;
+    }
+
+    #guardar:hover {
+      background-color: #007BAA;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Vamos a dibujar</h1>
+  
+  <div class="toolbar">
+    <!-- Botones para dibujar, borrar, limpiar y guardar -->
     <button class="herramienta" id="dibujar">Dibujar</button>
     <button class="herramienta" id="borrar">Borrar</button>
+    <button class="herramienta" id="limpiar">Limpiar canvas</button>
     <button class="herramienta" id="guardar">Guardar como PNG</button>
     
-    <!-- Selector de opciones para los diferentes tamaños de la brocha -->
-    <input type="color" id="color">
+    <!-- Selector de color y tamaño de brocha -->
+    <input type="color" id="color" value="#000000">
     <select id="radio">
       <option value=1>1</option>
       <option value=2>2</option>
@@ -26,63 +93,70 @@
       <option value=9>9</option>
       <option value=10>10</option>
     </select>
+  </div>
+  
+  <canvas></canvas>
+  
+  <script>
+    var operacion = "dibujar";
+    var radio = 1;
+    var pulsado = false; // De entrada no estoy pulsando el ratón
     
-    <canvas></canvas>
+    document.onmousedown = function() { pulsado = true; }; // Cuando pulso el botón izquierdo
+    document.onmouseup = function() { pulsado = false; }; // Cuando despulso
     
-    <script>
-      var operacion = "dibujar";
-      var radio = 1;
-      var pulsado = false; // De entrada no estoy pulsando el ratón
-      
-      document.onmousedown = function() { pulsado = true; }; // Cuando pulso el botón izquierdo
-      document.onmouseup = function() { pulsado = false; }; // Cuando despulso
-      
-      const lienzo = document.querySelector("canvas"); // Atrapo el lienzo
-      const contexto = lienzo.getContext("2d"); // Atrapo el contexto
-      contexto.fillStyle = "black";
-      lienzo.width = 512; // Le doy anchura al lienzo
-      lienzo.height = 512; // Le doy altura al lienzo
-      
-      lienzo.onmousemove = function(e) { // Cuando mueva el ratón por el lienzo
-        if (pulsado) { // Si tengo el ratón pulsado
-          if (operacion == "dibujar") {
-            contexto.fillRect(e.offsetX, e.offsetY, radio, radio); // Dibuja en la pantalla
-          } else {
-            contexto.clearRect(e.offsetX, e.offsetY, radio, radio);
-          }
+    const lienzo = document.querySelector("canvas"); // Atrapo el lienzo
+    const contexto = lienzo.getContext("2d"); // Atrapo el contexto
+    contexto.fillStyle = "black";
+    lienzo.width = 512; // Le doy anchura al lienzo
+    lienzo.height = 512; // Le doy altura al lienzo
+    
+    lienzo.onmousemove = function(e) { // Cuando mueva el ratón por el lienzo
+      if (pulsado) { // Si tengo el ratón pulsado
+        if (operacion == "dibujar") {
+          contexto.fillRect(e.offsetX, e.offsetY, radio, radio); // Dibuja en la pantalla
+        } else {
+          contexto.clearRect(e.offsetX, e.offsetY, radio, radio); // Borra el contenido
         }
-      };
+      }
+    };
 
-      document.getElementById("color").onchange = function() { // Cuando cambie el valor del color
-        contexto.fillStyle = this.value; // El color del contexto es el color del input
-      };
+    document.getElementById("color").onchange = function() { // Cuando cambie el valor del color
+      contexto.fillStyle = this.value; // El color del contexto es el color del input
+    };
 
-      document.getElementById("radio").onchange = function() { // Cuando cambie el valor del tamaño
-        radio = this.value; // Cambia el tamaño del lápiz
-      };
+    document.getElementById("radio").onchange = function() { // Cuando cambie el valor del tamaño
+      radio = this.value; // Cambia el tamaño del lápiz
+    };
 
-      document.getElementById("dibujar").onclick = function() { // Cambia a modo dibujar
-        operacion = "dibujar";
-      };
+    document.getElementById("dibujar").onclick = function() { // Cambia a modo dibujar
+      operacion = "dibujar";
+    };
 
-      document.getElementById("borrar").onclick = function() { // Cambia a modo borrar
-        operacion = "borrar";
-      };
+    document.getElementById("borrar").onclick = function() { // Cambia a modo borrar
+      operacion = "borrar";
+    };
+    
+    // Función para limpiar el canvas
+    document.getElementById("limpiar").onclick = function() { // Cambia a modo borrar
+      contexto.clearRect(0,0,lienzo.width,lienzo.height);
+    };
 
-      // Función para guardar la imagen del canvas
-      document.getElementById("guardar").onclick = function() {
-        const dataURL = lienzo.toDataURL("image/png"); // Convierte el canvas a una imagen PNG
+    // Función para guardar la imagen del canvas
+    document.getElementById("guardar").onclick = function() {
+      const dataURL = lienzo.toDataURL("image/png"); // Convierte el canvas a una imagen PNG
 
-        // Crea un enlace temporal para descargar la imagen
-        const a = document.createElement("a");
-        a.href = dataURL;
-        a.download = "imagenes pintadas/mi_dibujo.png"; // Nombre del archivo
+      // Crea un enlace temporal para descargar la imagen
+      const a = document.createElement("a");
+      a.href = dataURL;
+      a.download = "mi_dibujo.png"; // Nombre del archivo
 
-        // Simula un clic en el enlace para descargar la imagen
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      };
-    </script>
-  </body>
+      // Simula un clic en el enlace para descargar la imagen
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+  </script>
+
+</body>
 </html>

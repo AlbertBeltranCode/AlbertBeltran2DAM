@@ -2,27 +2,53 @@
 <html>
   <head>
     <style>
-      canvas{border:1px solid grey;}
+      /* Estilo para el canvas: se agrega un borde gris */
+      canvas {
+        border: 1px solid grey;
+      }
     </style>
   </head>
   <body>
+    <!-- Se crea un canvas donde se dibujarán los elementos -->
     <canvas></canvas>
+
     <script>
+      // Inicialización de las coordenadas iniciales del rectángulo
       var x = 20;
       var y = 20;
+
+      // Se selecciona el elemento canvas del DOM
       var lienzo = document.querySelector("canvas");
+
+      // Se obtiene el contexto 2D, necesario para dibujar en el canvas
       var contexto = lienzo.getContext("2d");
+
+      // Se define el ancho y alto del canvas
       lienzo.width = 512;
       lienzo.height = 512;
-      
-      var temporizador = setTimeout("bucle()",1000);
-      function bucle(){
-        contexto.clearRect(0,0,512,512);
-        x+=10;
-        contexto.fillRect(x,y,30,30);
-        console.log("esto es un bucle")
+
+      // Se establece un temporizador que ejecuta la función bucle después de 1 segundo
+      var temporizador = setTimeout("bucle()", 1000);
+
+      // Definición de la función bucle, que se ejecuta periódicamente
+      function bucle() {
+        // Limpia todo el contenido del canvas en cada iteración para evitar que los rectángulos previos se acumulen
+        contexto.clearRect(0, 0, 512, 512);
+
+        // Se incrementa la coordenada x, lo que hace que el rectángulo se mueva a la derecha
+        x += 10;
+
+        // Dibuja un rectángulo de 30x30 píxeles en la nueva posición (x, y)
+        contexto.fillRect(x, y, 30, 30);
+
+        // Imprime un mensaje en la consola para indicar que el bucle está activo
+        console.log("esto es un bucle");
+
+        // Cancela el temporizador actual para evitar superposiciones
         clearTimeout(temporizador);
-        temporizador = setTimeout("bucle()",1000);
+
+        // Reinicia el temporizador para que la función bucle vuelva a ejecutarse en 1 segundo
+        temporizador = setTimeout("bucle()", 1000);
       }
     </script>
   </body>
