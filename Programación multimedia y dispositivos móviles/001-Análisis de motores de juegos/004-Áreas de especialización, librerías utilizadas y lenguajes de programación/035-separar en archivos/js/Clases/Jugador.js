@@ -10,12 +10,12 @@ class Jugador{                                                          // Decla
         dibuja(){                                                             // Método que se ejecuta para dibujar al personaje
           if(this.direccion == "izquierda"){                                  // Si la direccion es izquierda, toma la primera mitad de la imagen
             contexto.drawImage(imagenbueno, 
-              0, 0, 35, 35,  // Source: x, y, width, height (on the sprite sheet)
+              0, 0, 50, 84,  // Source: x, y, width, height (on the sprite sheet)
               this.x-desfase_global_x, this.y, 35, 35  // Destination: x, y, width, height (on the canvas)
             );
           }else{                                                              // En caso contrario, toma la segunda mitad de la imagen
             contexto.drawImage(imagenbueno, 
-              35, 0, 35, 35,  // Source: x, y, width, height (on the sprite sheet)
+              50, 0, 50, 84,  // Source: x, y, width, height (on the sprite sheet)
               this.x-desfase_global_x, this.y, 35, 35  // Destination: x, y, width, height (on the canvas)
             );
           }

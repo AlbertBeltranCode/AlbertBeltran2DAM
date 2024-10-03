@@ -1,8 +1,8 @@
 class Npc{
         // Función que se ejecuta cuando se instancia el objeto
         constructor(){
-          this.x = Math.random()*2048; // Se le da una posición entre 0 y 512 en x
-          this.y = Math.random()*512; // Se le da una posición entre 0 y 512 en y
+          this.x = Math.random()*1024; // Se le da una posición entre 0 y 512 en x
+          this.y = Math.random()*200; // Se le da una posición entre 0 y 512 en y
           this.angulo = Math.random()*Math.PI*2 // Se le da  un ángulo entre 0 y 2*PI radianes
           this.vy = 0;
         }
@@ -14,7 +14,7 @@ class Npc{
           if(this.x < 0){this.x = 10;this.angulo += Math.PI;}
           if(this.x > 512){this.x = 502;this.angulo += Math.PI;}
           if(this.y < 0){this.y = 0;this.angulo += Math.PI;}
-          if(this.y > 512){this.y = 502;this.angulo += Math.PI;}
+          if(this.y > 360){this.y = 350;this.angulo += Math.PI;}
         }
         // Este método define el movimiento de la caja
         mueve(){
@@ -26,4 +26,13 @@ class Npc{
           //contexto.fillRect(this.x,this.y,30,30);
           contexto.drawImage(imagenmalo,this.x-desfase_global_x,this.y)
         }
-      }
+  
+        colisionaPlataformas(){
+          let pixel = contextoplataformas.getImageData(this.x-desfase_global_x,this.y+35,1,1)
+          if(pixel.data[3] > 0){
+            this.cayendo = false;
+          }else{
+            this.cayendo = true;
+          }
+        }
+}
