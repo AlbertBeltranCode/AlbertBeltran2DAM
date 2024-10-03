@@ -1,8 +1,2 @@
 <?xml version='1.0' encoding='utf-8'?>
-<cliente>
-<nombre>Albert</nombre>
-<apellidos>Beltran</apellidos>
-<emails>
-{'personal': 'albert@correo.com', 'profesional': 'albertito@empresa.com'}
-</emails>
-</cliente>
+<cliente><nombre>Albert</nombre><apellidos>Beltran</apellidos><emails>{'personal': 'albert@correo.com', 'profesional': 'albertito@empresa.com'}</emails></cliente>
