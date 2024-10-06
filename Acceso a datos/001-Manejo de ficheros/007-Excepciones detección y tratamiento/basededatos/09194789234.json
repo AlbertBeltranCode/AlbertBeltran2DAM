@@ -1,0 +1,8 @@
+{
+    "nombre": "PruebaPato",
+    "apellidos": "Patastico",
+    "emails": {
+        "personal": "pato@correo.com",
+        "profesional": "patopro@correo.com"
+    }
+}

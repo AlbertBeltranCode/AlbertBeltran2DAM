@@ -1,0 +1,8 @@
+{
+    "nombre": "Pruebavideo",
+    "apellidos": "Video",
+    "emails": {
+        "personal": "video@correo.com",
+        "profesional": "videopro@correo.com"
+    }
+}

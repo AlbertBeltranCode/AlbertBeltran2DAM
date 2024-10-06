@@ -26,7 +26,7 @@ def procesar():
     entrada = os.path.normpath(entrada)
     salida = os.path.normpath(salida)
 
-    # Asegurarse de que las rutas están entre comillas dobles
+    # Asegurarse de que las rutas están entre comillas simples
     command = ['ffmpeg', '-i', entrada, '-vf', f'scale={anchura.get()}:{altura.get()}', salida]
 
     try:
