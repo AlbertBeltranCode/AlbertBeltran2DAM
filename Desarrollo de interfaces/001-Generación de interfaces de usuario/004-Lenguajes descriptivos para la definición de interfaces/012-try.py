@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
-import subprocess  # Para ejecutar comandos en el sistema
+import subprocess
+import os
 
 ventana = tk.Tk()  # Crear la ventana principal
 
@@ -15,38 +16,40 @@ salida = None
 entrada = None
 
 def procesar():
-    # Función que procesa el video utilizando FFmpeg
-    print("Vamos a por ello")
-    
-    # Comando FFmpeg para redimensionar el video
-    command = "ffmpeg -i '" + entrada + "' -vf scale=" + anchura.get() + ":" + altura.get() + " '" + salida + "'"
-    print(command)  # Mostrar el comando en la consola
-    
+    global entrada, salida
+    # Verificar si las rutas de entrada y salida no están vacías
+    if not entrada or not salida:
+        print("Por favor, selecciona los archivos de entrada y salida.")
+        return
+
+    # Normalizar las rutas de archivo para evitar problemas
+    entrada = os.path.normpath(entrada)
+    salida = os.path.normpath(salida)
+
+    # Asegurarse de que las rutas están entre comillas dobles
+    command = ['ffmpeg', '-i', entrada, '-vf', f'scale={anchura.get()}:{altura.get()}', salida]
+
     try:
-        # Ejecutar el comando FFmpeg y capturar la salida
+        # Ejecutar el comando FFmpeg con argumentos separados
         result = subprocess.run(command, capture_output=True, text=True)
         
         # Mostrar la salida y posibles errores en la consola
         print("FFmpeg output:", result.stdout)
         print("FFmpeg error (if any):", result.stderr)
         
-        # Comprobar si el comando se ejecutó correctamente
         if result.returncode == 0:
             print("Video procesado con éxito")
         else:
             print("Error en el procesamiento del video")
-    
+
     except Exception as e:
-        # Capturar y mostrar cualquier excepción que ocurra durante la ejecución
         print("Error ejecutando el comando:", e)
 
 def seleccionaEntrada():
-    # Función para seleccionar el archivo de entrada
     global entrada
     entrada = filedialog.askopenfilename()
 
 def seleccionaSalida():
-    # Función para seleccionar la ruta del archivo de salida
     global salida
     salida = filedialog.asksaveasfilename()
 
