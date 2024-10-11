@@ -1,0 +1,42 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #009B77 0%, #A7DBD8 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+main {
+  box-sizing: border-box;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+  grid-auto-rows: calc(16.5rem * 9 / 16);
+  gap: 10px;
+  padding: 40px;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+  width: 100%;
+}
+
+.aplicacion {
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background: rgba(100, 100, 100, 0.5);
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.aplicacion:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}

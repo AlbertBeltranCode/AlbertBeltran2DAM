@@ -1,2 +1,6 @@
-CREATE TABLE `crimson`.`usuarios` (`Identificador` INT NOT NULL AUTO_INCREMENT , `usuario` VARCHAR(100) NOT NULL , `contrasena` VARCHAR(100) NOT NULL , `nombre` VARCHAR(100) NOT NULL , `apellidos` VARCHAR(100) NOT NULL , PRIMARY KEY (`Identificador`)) ENGINE = InnoDB;
-
+INSERT INTO `crimson`.`usuarios` (`usuario`, `contrasena`, `nombre`, `apellidos`) VALUES
+('jdoe', 'Doe1234!', 'John', 'Doe'),
+('asmith', 'SmithyPass22', 'Alice', 'Smith'),
+('bjohnson', 'BobbyJ2024', 'Bobby', 'Johnson'),
+('cwilliams', 'WillPower99', 'Catherine', 'Williams'),
+('mgarcia', 'GarciaSecure7', 'Marco', 'Garcia');

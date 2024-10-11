@@ -1,0 +1,99 @@
+body, html {
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #009B77 0%, #A7DBD8 100%);
+  padding: 0px;
+  height: 100%;
+  margin: 0px;
+  color: white;
+}
+
+header {
+  padding: 20px;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  height: 100%;
+}
+
+main nav {
+  width: 20%;
+  height: 100%;
+}
+
+main section {
+  width: 80%;
+  background: white;
+  height: 100%;
+  border-radius: 20px 0px 0px 0px;
+  color: black;
+  padding: 20px;
+}
+
+main section table {
+  width: 100%;
+}
+
+main section table thead {
+  background: #009B77;
+  color: white;
+}
+
+main section table thead tr th:first-child {
+  border-radius: 20px 0px 0px 20px;
+}
+
+main section table thead tr th:last-child {
+  border-radius: 0px 20px 20px 0px;
+}
+
+main section table td, main section table th {
+  padding: 10px;
+}
+
+main section table tbody tr:nth-child(even) {
+  background: #f0e0e3;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+nav ul li {
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Estilo al pasar el ratón */
+nav ul li:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco semitransparente */
+}
+  
+#logo {
+  display: inline-block;
+  margin: 2px;
+  float: left;
+  height: 40px;
+  width: auto;
+  border-radius: 50%;
+}
+
+.icono-papelera {
+  transition: transform 0.3s ease; /* Transición suave para el efecto */
+  cursor: pointer; /* Cambia el cursor a puntero */
+}
+
+.icono-papelera:hover {
+  transform: scale(1.2); /* Aumenta el tamaño del icono al pasar el ratón */
+}
+
+td.icono-papelera:hover {
+  background-color: darkred; /* Le aplicamos un fondo rojo cuando ponemos el raton encima */ 
+}
