@@ -75,7 +75,7 @@ function bucle() {
     }
   }
 
-  // Dibuja la puntuación en la parte superior izquierda
+  // Dibuja la puntuación en la parte inferior izquierda
   contexto.fillStyle = "white"; // Color del texto
   contexto.font = "20px Arial"; // Fuente y tamaño del texto
   contexto.fillText("Puntuación: " + puntuacion, 80, 500); // Dibuja el texto

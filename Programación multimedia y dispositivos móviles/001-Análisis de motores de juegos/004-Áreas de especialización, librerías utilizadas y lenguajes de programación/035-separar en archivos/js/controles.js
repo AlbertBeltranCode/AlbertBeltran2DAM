@@ -33,7 +33,7 @@ document.onkeydown = function(e) {
       puedeDisparar = false; // Desactiva el disparo
       recargando = true; // Activa el estado de recarga
 
-      // Reinicia el cooldown después de 1.5 segundos
+      // Reinicia el cooldown después de 1 segundos
       setTimeout(() => {
         puedeDisparar = true; // Permite disparar de nuevo
         recargando = false; // Desactiva el estado de recarga
