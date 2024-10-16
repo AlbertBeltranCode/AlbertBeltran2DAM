@@ -32,7 +32,7 @@
 						//$resultado[] = $row;											// Los añado al array
 						$fila = [];
 						foreach($row as $clave=>$valor){
-							$fila[$clave] = $this->codifica($valor);
+							$fila[$clave] = $valor;
 						}
 						$resultado[] = $fila;
 				}
