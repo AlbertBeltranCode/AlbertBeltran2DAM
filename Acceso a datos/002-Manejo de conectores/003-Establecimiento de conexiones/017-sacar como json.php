@@ -1,12 +1,12 @@
 <?php
 
-$mysqli = mysqli_connect("localhost", "accesoadatos", "accesoadatos", "accesoadatos");
-$query = "SELECT * FROM empleados";
-$result = mysqli_query($mysqli, $query);
-$resultado = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $resultado[] = $row;
+$mysqli = mysqli_connect("localhost", "accesoadatos", "accesoadatos", "accesoadatos"); // Establece la conexión a la base de datos MySQL con las credenciales proporcionadas
+$query = "SELECT * FROM empleados"; // Define la consulta SQL para seleccionar todos los registros de la tabla 'empleados'
+$result = mysqli_query($mysqli, $query); // Ejecuta la consulta y almacena el resultado en la variable $result
+$resultado = []; // Inicializa un array vacío para almacenar los resultados
+while ($row = mysqli_fetch_assoc($result)) { // Itera sobre cada fila del resultado como un array asociativo
+    $resultado[] = $row; // Agrega la fila actual al array $resultado
 }
-var_dump($resultado);
+var_dump($resultado); // Muestra el contenido del array $resultado en formato legible
 
 ?>

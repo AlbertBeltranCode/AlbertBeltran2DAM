@@ -1,13 +1,14 @@
 <?php
 
-	$mysqli = mysqli_connect("localhost", "accesoadatos", "accesoadatos", "accesoadatos");
-	$query = "SELECT * FROM empleados";
-	$result = mysqli_query($mysqli, $query);
-	$resultado = [];
-	while ($row = mysqli_fetch_assoc($result)) {
-		  $resultado[] = $row;
-	}
-	$json = json_encode($resultado, JSON_PRETTY_PRINT);
-	echo $json;
+$mysqli = mysqli_connect("localhost", "accesoadatos", "accesoadatos", "accesoadatos"); // Establece la conexión a la base de datos MySQL con las credenciales proporcionadas
+$query = "SELECT * FROM empleados"; // Define la consulta SQL para seleccionar todos los registros de la tabla 'empleados'
+$result = mysqli_query($mysqli, $query); // Ejecuta la consulta y almacena el resultado en la variable $result
+$resultado = []; // Inicializa un array vacío para almacenar los resultados
+while ($row = mysqli_fetch_assoc($result)) {
+	// Itera sobre cada fila del resultado como un array asociativo
+	$resultado[] = $row; // Agrega la fila actual al array $resultado
+}
+$json = json_encode($resultado, JSON_PRETTY_PRINT); // Convierte el array $resultado a formato JSON con formato legible (con sangrías)
+echo $json; // Imprime el JSON resultante
 
 ?>
