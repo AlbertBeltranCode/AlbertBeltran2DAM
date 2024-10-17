@@ -20,6 +20,6 @@ window.onload = function(){
         })
         .then(data => {
           console.log('Success:', data);                // De momento voy a poner ese JSON en la consola simplemente para ver que la comunicacion es ok
-        })
-    }
-}
+        });
+    };
+};
