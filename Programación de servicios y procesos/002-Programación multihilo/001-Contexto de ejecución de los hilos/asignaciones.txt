@@ -10,3 +10,5 @@ Al usuarioborja le ha tocado la tarea: [8765, 6543, 3210, 765, 432, 543, 345, 43
 
 Al usuarioBlanca le ha tocado la tarea: [345, 765, 123, 432, 987, 234, 567, 543, 234, 876, 345, 987, 543, 987, 123, 987, 543, 234, 876, 432]
 
+Al usuarioPaco le ha tocado la tarea: [876, 543, 432, 345, 876, 543, 123, 654, 234, 543, 765, 876, 234, 987, 654, 432, 987, 765, 345, 654]
+
