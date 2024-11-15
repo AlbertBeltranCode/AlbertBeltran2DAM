@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chat en tiempo real</title>
+        <style>
+            /* Estilos básicos */
+            section {
+                width: 400px;
+                height: 800px;
+                border: 1px solid grey;
+                overflow-y: scroll;
+                margin-bottom: 10px;
+            }
+            article {
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            /* Clase general para los mensajes */
+            .mensaje {
+                color: black;
+            }
+            /* Mensajes propios (color verde para el usuario que envía el mensaje) */
+            .propio {
+                background: lightgreen;
+            }
+            /* Mensajes ajenos */
+            .ajeno {
+                background: lightcoral;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <input id="usuario" placeholder="Introduce tu usuario" />
+            <section id="mensajes"></section>
+            <input id="mensaje" placeholder="Escribe tu mensaje" />
+            <button id="enviar">Enviar</button>
+        </main>
+
+        <script>
+            // Conexión al WebSocket
+            const socket = new WebSocket("ws://localhost:5000");
+            const seccion = document.querySelector("#mensajes");
+            const usuarioInput = document.querySelector("#usuario");
+            const mensajeInput = document.querySelector("#mensaje");
+
+            let usuarioActual = ""; // El usuario actual
+            const colorUsuarios = {}; // Mapa para almacenar colores por usuario
+
+            // Función para generar un color aleatorio en formato hex
+            function generarColorAleatorio() {
+                const letras = "0123456789ABCDEF";
+                let color = "#";
+                for (let i = 0; i < 6; i++) {
+                    color += letras[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            // Función para recibir mensajes del servidor
+            socket.onmessage = function (event) {
+                try {
+                    const datos = JSON.parse(event.data); // Intentamos convertir el mensaje a JSON
+                    console.log("Mensaje recibido:", datos);
+
+                    if (datos && datos.usuario && datos.mensaje) {
+                        const mensajeDiv = document.createElement("article");
+                        let color = colorUsuarios[datos.usuario] || generarColorAleatorio(); // Asignamos un color aleatorio si no lo tiene
+
+                        // Si el mensaje es de otro usuario, lo mostramos con su color
+                        if (datos.usuario !== usuarioActual) {
+                            mensajeDiv.classList.add("ajeno");
+                        }
+
+                        mensajeDiv.classList.add("mensaje");
+                        mensajeDiv.style.backgroundColor = color; // Aplicamos el color
+
+                        mensajeDiv.innerHTML = `<strong>${datos.usuario}:</strong> ${datos.mensaje}`;
+                        seccion.appendChild(mensajeDiv);
+                        seccion.scrollTop = seccion.scrollHeight; // Desplazar al fondo para ver el último mensaje
+
+                        // Guardar el color asignado al usuario
+                        colorUsuarios[datos.usuario] = color;
+                    }
+                } catch (error) {
+                    console.error("Error al recibir el mensaje:", error);
+                }
+            };
+
+            // Enviar mensaje cuando el botón es presionado
+            document.querySelector("#enviar").addEventListener("click", function () {
+                const usuario = usuarioInput.value.trim();
+                const mensaje = mensajeInput.value.trim();
+
+                if (usuario && mensaje) {
+                    // Guardamos el usuario para identificar los mensajes enviados por él
+                    if (!usuarioActual) usuarioActual = usuario;
+
+                    // Asignar un color único aleatorio al usuario si no tiene uno asignado
+                    if (!colorUsuarios[usuario]) {
+                        colorUsuarios[usuario] = generarColorAleatorio();
+                    }
+
+                    // Mostrar el mensaje localmente en la pantalla del usuario en verde (o color asignado)
+                    const mensajeDiv = document.createElement("article");
+                    mensajeDiv.classList.add("propio"); // Lo mostramos en verde (mensaje propio)
+                    mensajeDiv.style.backgroundColor = colorUsuarios[usuario]; // Usamos el color asignado
+                    mensajeDiv.innerHTML = `<strong>${usuario}</strong>: ${mensaje}`;
+                    seccion.appendChild(mensajeDiv);
+                    seccion.scrollTop = seccion.scrollHeight; // Desplazar al fondo para ver el último mensaje
+
+                    // Enviar el mensaje al servidor a través del WebSocket
+                    const mensajeObj = {
+                        usuario: usuario,
+                        mensaje: mensaje
+                    };
+                    socket.send(JSON.stringify(mensajeObj)); // Enviamos el mensaje al servidor
+
+                    // Limpiar el campo de mensaje después de enviarlo
+                    mensajeInput.value = "";
+                }
+            });
+
+            // También permitir enviar con la tecla "Enter"
+            mensajeInput.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    document.querySelector("#enviar").click();
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,33 +1,65 @@
 <!doctype html>
+<!-- Indica que este es un documento HTML5 -->
 <html>
+	<!-- Inicio del documento HTML -->
 	<head>
-	
+		<!-- Sección de la cabecera del documento -->
 	</head>
-	<body>	<input>
+	<!-- Fin de la cabecera -->
+	<body>
+		<input />
+		<!-- Campo de entrada de texto donde el usuario ingresa su nombre -->
+
 		<script>
-			var entrada = document.querySelector("input")                       // Atrapamos la entrada
-			entrada.onchange = function(){                                      // Cuando la entrada cambie (fuerzo un evento)
-				console.log("Ok te has identificado como",this.value)             // Comprobamos que atrapamos la info del usuario
-				
+			<!-- Inicio del bloque de código JavaScript -->
+			// Selecciona el elemento <input> en la página
+			var entrada = document.querySelector("input");
+
+			// Define un evento que se ejecuta cuando el valor del input cambia
+			entrada.onchange = function () {
+				// Muestra en la consola un mensaje junto con el valor ingresado por el usuario
+				console.log("Ok te has identificado como", this.value);
+
 				///////////////// CLIENTE ---------> SERVIDOR ///////////////////////////////////////////////////////
-				
-				fetch("008.php?usuario="+encodeURI(this.value))                   // realizo una peticion asincrónica
-				.then(function(response){                                         // Cuando reciba la respuesta
-					return response.text()                                          // Hoy la quiero procesar como texto
-				})
-				.then(function(datos){                                            // Cuando esa conversión se haya realizado
-				///////////////// CLIENTE <---------- SERVIDOR //////////////////////////////////////////////////
-					console.log(datos)                                              // Pongo los datos en consola solo para comprobar que me llegan
-					let conjunto = JSON.parse(datos)                                // Convierto los datos de string a array
-					console.log(conjunto)                                           // Lo pongo en console como debug para comprobar que todo va ok
-					let suma = 0;                                                   // Creo una suma inicial
-					for(let i = 0;i<conjunto.length;i++){                           // Recorro el array
-						suma += conjunto[i]                                           // Y al valor anterior le sumo lo que valga ese elemento del array
-					}
-					///////////////// CLIENTE ---------> SERVIDOR //////////////////////////////////////////////////
-					fetch("008-resultado.php?resultado="+suma)                      // Y al final le devuelvo al servidor el resultado de la operacion
-				})
-			}
+
+				// Realiza una petición HTTP GET al archivo "008.php"
+				// Pasando el valor del input como parámetro en la URL (el nombre del usuario)
+				fetch("008.php?usuario=" + encodeURI(this.value))
+					// Cuando se recibe la respuesta, se convierte a texto
+					.then(function (response) {
+						return response.text(); // Se procesará la respuesta como texto
+					})
+					// Cuando la conversión se haya completado
+					.then(function (datos) {
+						///////////////// CLIENTE <---------- SERVIDOR //////////////////////////////////////////////////
+
+						// Muestra los datos recibidos desde "008.php" en la consola (para verificar)
+						console.log(datos);
+
+						// Convierte los datos recibidos (que están en formato JSON) a un array
+						let conjunto = JSON.parse(datos);
+
+						// Muestra el array de datos en la consola como depuración
+						console.log(conjunto);
+
+						// Inicializa una variable suma para calcular la suma de los elementos del array
+						let suma = 0;
+
+						// Recorre el array y suma cada uno de sus elementos
+						for (let i = 0; i < conjunto.length; i++) {
+							suma += conjunto[i]; // Suma el valor de cada elemento al total
+						}
+
+						///////////////// CLIENTE ---------> SERVIDOR //////////////////////////////////////////////////
+
+						// Realiza una nueva petición HTTP GET al archivo "008-resultado.php"
+						// Pasando el resultado de la suma como parámetro en la URL
+						fetch("008-resultado.php?resultado=" + suma); // Envía el resultado de la suma al servidor
+					});
+			};
 		</script>
+		<!-- Fin del bloque de código JavaScript -->
 	</body>
+	<!-- Fin del cuerpo del documento -->
 </html>
+<!-- Fin del documento HTML -->

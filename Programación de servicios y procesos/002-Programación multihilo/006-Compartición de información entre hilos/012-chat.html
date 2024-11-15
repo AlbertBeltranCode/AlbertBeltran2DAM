@@ -1,55 +1,83 @@
 <!doctype html>
+<!-- Indica que este es un documento HTML5 -->
 <html>
+  <!-- Inicio del documento HTML -->
   <head>
     <style>
-      section{
-        width:400px;
-        height:800px;
-        border:1px solid grey;
+      /* Estilo para el contenedor de los mensajes (section) */
+      section {
+        width: 400px; /* Ancho de la sección */
+        height: 800px; /* Altura de la sección */
+        border: 1px solid grey; /* Borde de la sección */
       }
-      article{
-        box-sizing:border-box;
-        padding:20px;
-        background:lightgreen;
-        border-radius:0px 10px 10px 10px;
-        margin:10px;
-        width:80%;
-        box-shadow:0px 2px 4px rgba(0,0,0,0.3);
+
+      /* Estilo para cada mensaje (article) */
+      article {
+        box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total del elemento */
+        padding: 20px; /* Espaciado interno */
+        background: lightgreen; /* Color de fondo de los mensajes */
+        border-radius: 0px 10px 10px 10px; /* Bordes redondeados */
+        margin: 10px; /* Espaciado entre los artículos */
+        width: 80%; /* Ancho de cada artículo */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en los artículos */
       }
     </style>
   </head>
   <body>
     <main>
+      <!-- Contenedor principal -->
       <section></section>
-      <input id="mensaje">
+      <!-- Sección donde se mostrarán los mensajes -->
+      <input id="mensaje" />
+      <!-- Campo de entrada para enviar mensajes -->
     </main>
+
     <script>
+      <!-- Bloque de código JavaScript -->
+
       ///////////////////////////////// BUCLE DE LECTURA ///////////////////////////////////////
-      function bucle(){                                                                 // Defino una funcion de bucle
-        fetch("http://192.168.1.225:5000/dame")                                         // Realizo una peticion de recepcion
-        .then(function(response){
-          return response.json()                                                         // Convierto la respuesta a json
-        })
-        .then(function(datos){                                                          // Cuando reciba los datos
-          let seccion = document.querySelector("section")                               // Selecciono el contenedor de destino
-          seccion.innerHTML = ""                                                        // Vacío el contenedor
-          datos.forEach(function(dato){                                                 // PAra cada uno de los datos que haya venido
-            let bloque = document.createElement("article")
-            bloque.textContent = dato.mensaje
-            seccion.appendChild(bloque)
-            
+      // Esta función realiza una petición al servidor para obtener los mensajes
+      function bucle() {
+        // Realiza una solicitud fetch para obtener los mensajes
+        fetch("http://192.168.1.225:5000/dame")
+          .then(function (response) {
+            return response.json(); // Convierte la respuesta del servidor a formato JSON
           })
-        })
-        clearTimeout(temporizador)                                                      // Detengo el temporizador
-        temporizador = setTimeout("bucle()",1000)                                       // Vuelvo a arrancar el bucle dentro de un segundo
+          .then(function (datos) {
+            // Selecciona la sección donde se mostrarán los mensajes
+            let seccion = document.querySelector("section");
+            seccion.innerHTML = ""; // Limpia el contenido de la sección
+
+            // Recorre los datos recibidos y agrega cada mensaje a la página
+            datos.forEach(function (dato) {
+              let bloque = document.createElement("article"); // Crea un nuevo elemento <article>
+              bloque.textContent = dato.mensaje; // Asigna el mensaje al contenido del artículo
+              seccion.appendChild(bloque); // Agrega el artículo a la sección
+            });
+          });
+
+        // Detiene el temporizador anterior (si existe)
+        clearTimeout(temporizador);
+
+        // Reinicia el temporizador para volver a ejecutar la función 'bucle()' cada 1000ms (1 segundo)
+        temporizador = setTimeout("bucle()", 1000);
       }
+
       ///////////////////////////////// ENVÍO DE MENSAJES ///////////////////////////////////////
-      let entrada = document.querySelector("input")                                     // Selecciono la entrada
-      entrada.onchange = function(){                                                    // Cuando cambie la entrada
-        fetch("http://192.168.1.225:5000/toma?mensaje="+encodeURI(this.value))          // Realizo una peticion de envio
-      }
+      // Selecciona el campo de entrada (input)
+      let entrada = document.querySelector("input");
+
+      // Cuando el valor del campo de entrada cambie, se enviará el mensaje
+      entrada.onchange = function () {
+        // Realiza una solicitud GET para enviar el mensaje al servidor
+        fetch("http://192.168.1.225:5000/toma?mensaje=" + encodeURI(this.value));
+      };
+
       ///////////////////////////////// PONGO EL BUCLE EN MARCHA ///////////////////////////////////////
-      var temporizador = setTimeout("bucle()",1000)                                     // Lanzo una primera ejecución del bucle                                 
+      // Inicializa el temporizador que llama a la función 'bucle()' por primera vez
+      var temporizador = setTimeout("bucle()", 1000);
     </script>
+    <!-- Fin del bloque de código JavaScript -->
   </body>
 </html>
+<!-- Fin del documento HTML -->

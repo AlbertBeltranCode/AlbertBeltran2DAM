@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify                            # Importamos la libreria Flask y requests para coger parametros de la url
+from flask import Flask, request, jsonify                   # Importamos la libreria Flask y requests para coger parametros de la url
 from flask_cors import CORS
 
 mensajes = []                                               # Creamos una lista que cuando arranca el servidor esta vacia

@@ -1,21 +1,36 @@
 <?php
-    $file = 'tareas.txt';
+// Define el nombre del archivo que contiene las tareas
+$file = "tareas.txt";
 
-    // Read the file into an array, where each element is a line
-    $lines = file($file);
-	$tarea = $lines[0];
-    // Output the first line
-    echo $lines[0];
+// Lee el contenido del archivo "tareas.txt" y lo convierte en un array,
+// donde cada elemento del array es una línea del archivo
+$lines = file($file);
 
-    // Remove the first line
-    array_shift($lines);
+// Asigna la primera línea del archivo a la variable $tarea
+$tarea = $lines[0];
 
-    // Save the remaining lines back into the file, using "\n" to keep the file's line breaks
-    file_put_contents($file, implode('', $lines));
-    
-    $myfile = fopen("asignaciones.txt", "a");
-	$txt = "Al usuario".$_GET['usuario']." le ha tocado la tarea: ".$tarea."\n";
-	fwrite($myfile, $txt);
-	fclose($myfile);
+// Muestra (imprime) la primera línea del archivo (la tarea asignada)
+echo $lines[0];
 
+// Elimina la primera línea del array, ya que esa tarea ha sido asignada
+array_shift($lines);
+
+// Guarda el contenido restante del array en el archivo "tareas.txt",
+// sobrescribiendo el archivo original sin la primera línea
+// 'implode' convierte el array de líneas en un solo string, sin modificarlas
+file_put_contents($file, implode("", $lines));
+
+// Abre el archivo "asignaciones.txt" en modo de añadir (append)
+// Si el archivo no existe, lo crea automáticamente
+$myfile = fopen("asignaciones.txt", "a");
+
+// Prepara el texto a escribir en el archivo "asignaciones.txt",
+// donde se incluye el nombre del usuario pasado por la URL y la tarea asignada
+$txt = "Al usuario " . $_GET["usuario"] . " le ha tocado la tarea: " . $tarea . "\n";
+
+// Escribe el texto en el archivo "asignaciones.txt"
+fwrite($myfile, $txt);
+
+// Cierra el archivo "asignaciones.txt" para asegurarse de que los cambios se guarden
+fclose($myfile);
 ?>

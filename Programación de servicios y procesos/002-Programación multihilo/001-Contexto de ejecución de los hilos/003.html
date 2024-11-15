@@ -1,15 +1,32 @@
 <!doctype html>
+<!-- Indica que este es un documento HTML5 -->
 <html>
+	<!-- Inicio del documento HTML -->
 	<head>
-	
+		<!-- Sección de la cabecera del documento -->
 	</head>
-	<body>	<input>
+	<!-- Fin de la cabecera -->
+	<body>
+		<input />
+		<!-- Campo de entrada de texto para que el usuario ingrese información -->
+
 		<script>
-			var entrada = document.querySelector("input")
-			entrada.onchange = function(){
-				console.log("Ok te has identificado como",this.value)
-				fetch("003.php?usuario="+encodeURI(this.value))
-			}
+			<!-- Inicio del bloque de código JavaScript -->
+			// Selecciona el elemento <input> en la página
+			var entrada = document.querySelector("input");
+
+			// Define un evento que se ejecuta cuando el valor del input cambia
+			entrada.onchange = function () {
+				// Muestra en la consola un mensaje junto con el valor ingresado por el usuario
+				console.log("Ok te has identificado como", this.value);
+
+				// Realiza una petición HTTP GET al archivo "003.php", pasando el valor del input como parámetro
+				fetch("003.php?usuario=" + encodeURI(this.value));
+				// 'encodeURI' se usa para codificar el valor en caso de que contenga caracteres especiales
+			};
 		</script>
+		<!-- Fin del bloque de código JavaScript -->
 	</body>
+	<!-- Fin del cuerpo del documento -->
 </html>
+<!-- Fin del documento HTML -->

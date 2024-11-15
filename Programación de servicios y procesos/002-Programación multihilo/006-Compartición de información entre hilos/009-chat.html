@@ -1,30 +1,52 @@
 <!doctype html>
+<!-- Indica que este es un documento HTML5 -->
 <html>
-  <head>
-  </head>
+  <!-- Inicio del documento HTML -->
+  <head> </head>
+  <!-- Cabecera del documento (vacía en este caso) -->
   <body>
     <main>
+      <!-- Contenedor principal -->
       <section></section>
-      <input id="mensaje">
+      <!-- Sección vacía dentro del main donde se mostrarán los mensajes -->
+      <input id="mensaje" />
+      <!-- Un campo de entrada de texto con el ID "mensaje" -->
     </main>
+
     <script>
-      function bucle(){
+      <!-- Inicio del bloque de código JavaScript -->
+      // Define la función 'bucle', que realiza una petición al servidor cada segundo
+      function bucle() {
+        // Realiza una petición GET al servidor en la dirección especificada
         fetch("http://192.168.1.225:5000/dame")
-        .then(function(response){
-          return response.json()
-        })
-        .then(function(datos){
-          let seccion = document.querySelector("section")
-          seccion.innerHTML = ""
-          datos.forEach(function(dato){
-            seccion.innerHTML += dato.mensaje+"<br>";
+          // Convierte la respuesta del servidor a formato JSON
+          .then(function (response) {
+            return response.json();
           })
-        })
-        clearTimeout(temporizador)
-        temporizador = setTimeout("bucle()",1000)
+          // Cuando se recibe la respuesta en formato JSON
+          .then(function (datos) {
+            // Selecciona la sección donde se van a mostrar los mensajes
+            let seccion = document.querySelector("section");
+            seccion.innerHTML = ""; // Limpia el contenido de la sección
+
+            // Recorre cada dato recibido y agrega el mensaje al contenido de la sección
+            datos.forEach(function (dato) {
+              seccion.innerHTML += dato.mensaje + "<br>"; // Agrega el mensaje con un salto de línea
+            });
+          });
+
+        // Detiene el temporizador anterior (si existe)
+        clearTimeout(temporizador);
+
+        // Establece un nuevo temporizador que llama a la función 'bucle()' cada 1000ms (1 segundo)
+        temporizador = setTimeout("bucle()", 1000);
       }
-      
-      var temporizador = setTimeout("bucle()",1000)
+
+      // Inicializa el temporizador llamando a la función 'bucle()' por primera vez,
+      // que ejecutará la función de manera repetitiva cada segundo
+      var temporizador = setTimeout("bucle()", 1000);
     </script>
+    <!-- Fin del bloque de código JavaScript -->
   </body>
 </html>
+<!-- Fin del documento HTML -->

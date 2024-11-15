@@ -1,16 +1,20 @@
 <?php
-    $file = 'tareas.txt';
+// Nombre del archivo que contiene las tareas
+$file = "tareas.txt";
 
-    // Read the file into an array, where each element is a line
-    $lines = file($file);
+// Lee el contenido del archivo y lo convierte en un array,
+// donde cada elemento del array es una línea del archivo
+$lines = file($file);
 
-    // Output the first line
-    echo $lines[0];
+// Muestra (imprime) la primera línea del archivo
+echo $lines[0];
 
-    // Remove the first line
-    array_shift($lines);
+// Elimina la primera línea del array (la que ya se mostró)
+array_shift($lines);
 
-    // Save the remaining lines back into the file, using "\n" to keep the file's line breaks
-    file_put_contents($file, implode('', $lines));
+// Guarda el contenido restante del array en el archivo,
+// sobrescribiendo el archivo original sin la primera línea.
+// 'implode' convierte el array de líneas en un string, usando '' como separador
+file_put_contents($file, implode("", $lines));
 
 ?>
