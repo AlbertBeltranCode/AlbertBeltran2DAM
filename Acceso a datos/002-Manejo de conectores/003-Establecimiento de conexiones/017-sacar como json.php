@@ -8,5 +8,5 @@ while ($row = mysqli_fetch_assoc($result)) { // Itera sobre cada fila del result
     $resultado[] = $row; // Agrega la fila actual al array $resultado
 }
 var_dump($resultado); // Muestra el contenido del array $resultado en formato legible
-
+//Comentario
 ?>
