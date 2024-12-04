@@ -1,18 +1,18 @@
 [
     {
-        "nombre": "Jose Vicente",
-        "apellidos": "Carratala Sanchis",
-        "edad": 46,
+        "nombre": "Albert",
+        "apellidos": "Beltran Carbonell",
+        "edad": 25,
         "emails": [
             {
                 "tipo": "personal",
-                "valor": "info@josevicentecarratala.com"
+                "valor": "albert@correo.com"
             },
             {
                 "tipo": "trabajo",
                 "valor": [
-                    "info@jocarsa.com",
-                    "jocarsa2@gmail.com"
+                    "info@albertcode.com",
+                    "albertcode@gmail.com"
                 ]
             }
         ]
