@@ -2,28 +2,113 @@
   font-family: personalizada;
   src: url(personalizada.ttf);
 }
-*{transition:all 1s;}
-.jvampliador{
-	position:fixed;
-	top:10px;
-	right:10px;
+@font-face {
+  font-family: notosans;
+  src: url(notosans.ttf);
 }
-.jvampliador button{
-	border:none;
-	margin:0px;
-	padding:5px;
-	background:black;
-	color:white;
-	width:30px;
-	height:30px;
-	font-weight:bold;
-	font-size:26px;
-	line-height:16px;
-	
+@font-face {
+  font-family: bailsun;
+  src: url(bailsun.ttf);
 }
-.jvampliador button:first-child{
-	border-radius:30px 0px 0px 30px;
+
+* {
+  transition: all 1s ease;
 }
-.jvampliador button:last-child{
-	border-radius:0px 30px 30px 0px;
+
+body {
+  font-family: 'notosans', sans-serif; /* Fuente predeterminada */
 }
+
+/* Estilo para el contenedor de los botones */
+.jvampliador {
+  position: fixed;
+  top: 10px; /* Asegura que esté cerca de la parte superior */
+  left: 50%; /* Centra el contenedor horizontalmente */
+  transform: translateX(-50%); /* Ajuste para asegurar que el contenedor esté perfectamente centrado */
+  z-index: 1000; /* Para asegurarse de que esté encima de otros elementos */
+  display: flex; /* Usar flexbox para el contenido */
+  justify-content: center; /* Centra los botones dentro del contenedor */
+}
+
+/* Estilo para los botones */
+.jvampliador button {
+  border: none;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px; /* Redondeo de bordes similar al de los mensajes */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.jvampliador button:hover {
+  background-color: #009B77;
+  box-shadow: 5px 5px 5px black;
+}
+
+/* Estilos de los mensajes */
+.mensaje {
+  position: fixed;
+  top: 50%; /* Centrado verticalmente */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centrado horizontal y vertical */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 10px;
+  display: none;
+  z-index: 10000;
+}
+
+.mensaje1 {
+  background-color: rgba(0, 200, 0, 0.8); /* Verde para el mensaje inicial */
+}
+
+.mensaje2 {
+  background-color: rgba(255, 140, 0, 0.8); /* Naranja para "ampliar" */
+}
+
+.mensaje3 {
+  background-color: rgba(0, 0, 255, 0.8); /* Azul para "reducir" */
+}
+
+.mensaje4 {
+  background-color: rgba(200, 0, 0, 0.8); /* Rojo para el error */
+}
+
+/* Estilos del desplegable de fuentes */
+/* Estilos para el desplegable */
+.fuentes-list {
+    display: none; /* Asegura que la lista se inicie oculta */
+    position: absolute;
+    background-color: white;
+	color:black;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Asegura que la lista se muestre por encima de otros elementos */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Estilos para cada elemento de la lista */
+.fuente-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Estilo de hover para los elementos de la lista */
+.fuente-item:hover {
+    background-color: #f0f0f0;
+}
+

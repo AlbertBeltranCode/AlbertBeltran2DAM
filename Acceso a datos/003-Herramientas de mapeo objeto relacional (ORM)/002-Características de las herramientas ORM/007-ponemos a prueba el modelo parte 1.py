@@ -25,7 +25,8 @@ cursor = conexion.cursor()  # Configuro el cursor para interactuar con la base d
 
 profesores = []  # Lista vacía para almacenar objetos de tipo Profesor
 
-profesores.append(Profesor("Jose Vicente", "Profesor de informatica", ['Albert', 'Jose Manuel', 'Dragos']))  
+profesores.append(Profesor("Jose Vicente", "Profesor de informatica", ['Albert', 'Jose Manuel', 'Dragos']))
+profesores.append(Profesor("Pilar", "Profesora de fol", ['Juanito', 'Menganito', 'Ramoncin'])) 
 # Agrego un objeto Profesor con un nombre, descripción y lista de alumnos
 
 ##################################### BORRAMOS LA TABLA ANTERIOR POR SI ACASO HAY DATOS ANTERIOR
@@ -49,7 +50,7 @@ for atributo in atributos:  # Itero sobre los atributos obtenidos
         # Si el atributo es una lista, se trata de una relación con otra tabla
         peticion2 = "DROP TABLE IF EXISTS "+atributo+""  # Preparo la consulta para eliminar la tabla relacionada si existe
         cursor.execute(peticion2)  # Ejecuto la consulta
-        peticion2 = "CREATE TABLE IF NOT EXISTS "+atributo+" (Identificador INT NOT NULL AUTO_INCREMENT,FK INT(255),"+atributo+" VARCHAR(255),PRIMARY KEY (Identificador))"  
+        peticion2 = "CREATE TABLE IF NOT EXISTS "+atributo+" (Identificador INT NOT NULL AUTO_INCREMENT,AsignacionProfesor INT(255),"+atributo+" VARCHAR(255),PRIMARY KEY (Identificador))"  
         # Creo una tabla separada para este atributo con una clave foránea FK
         cursor.execute(peticion2)  # Ejecuto la consulta para crear la tabla relacionada
 
@@ -70,11 +71,13 @@ for indice, profesor in enumerate(profesores):  # Itero sobre los profesores en 
         else:  
             # Si el atributo es una lista, inserto cada elemento en la tabla relacionada
             for elemento in getattr(profesor, atributo):
-                peticion2 = "INSERT INTO "+atributo+" VALUES(NULL,"+str(indice+1)+",'"+str(elemento)+"')"  
+                peticion2 = f"INSERT INTO {atributo} VALUES(NULL, {indice+1}, '{elemento}')"  
                 # Preparo la consulta para insertar en la tabla relacionada
                 cursor.execute(peticion2)  # Ejecuto la consulta para la tabla relacionada
-                peticion = peticion[:-1]  # Elimino la última coma en la consulta de la tabla principal
+
+    peticion = peticion[:-1]  # Elimino la última coma de la consulta de la tabla principal
     peticion += ");"  # Cierro la consulta de inserción
+    print(f"Ejecutando: {peticion}")  # Depuración: Muestra la consulta generada
     cursor.execute(peticion)  # Ejecuto la consulta para insertar en la tabla principal
 
 conexion.commit()  # Confirmo los cambios realizados en la base de datos
