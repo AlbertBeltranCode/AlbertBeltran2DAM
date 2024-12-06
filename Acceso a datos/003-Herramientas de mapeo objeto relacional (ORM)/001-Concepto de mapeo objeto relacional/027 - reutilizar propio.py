@@ -31,7 +31,7 @@ personas = []  # Creo una lista vacía para almacenar los productos
 
 # Agrego algunos productos a la lista
 personas.append(Producto("Calzoncillos","Calzoncillos calvin klein",5.25,"Azules",['ropa','hombre']))
-personas.append(Producto("Falda bonita","Falda de tubo",3.99,"Roja",['ropa','mujer']))
+personas.append(Producto("Falda bonita","Falda de tubo",3.99,"Verde",['ropa','mujer']))
 personas.append(Producto("Zapatilla newbalance","Increibles zapatillas a la ultima",53.40,"Amarillas",['ropa','unisex']))
 
 ##################################### BORRAMOS LA TABLA ANTERIOR POR SI ACASO HAY DATOS ANTERIOR

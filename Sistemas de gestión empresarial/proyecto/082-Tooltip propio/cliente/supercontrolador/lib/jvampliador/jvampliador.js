@@ -19,6 +19,7 @@ aumentar.onclick = function () {
 let contraste = document.createElement("button");
 contraste.textContent = "C";
 contraste.setAttribute("aria-label", "Contraste");
+contraste.setAttribute("title", "Cambiar el contraste de los colores de la aplicacion");
 contenedor.appendChild(contraste);
 
 // Variable para controlar el estado del contraste
@@ -39,6 +40,7 @@ contraste.onclick = function () {
 let invertir = document.createElement("button");
 invertir.textContent = "I";
 invertir.setAttribute("aria-label", "Invertir");
+invertir.setAttribute("title", "Activar el modo nocturno");
 contenedor.appendChild(invertir);
 invertir.onclick = function () {
     if (invertido == false) {
@@ -55,6 +57,7 @@ let fuentes = ['"bailsun"', '"notosans"', '"arial"', '"verdana"']; // Lista de f
 let fuente = document.createElement("button");
 fuente.textContent = "F";
 fuente.setAttribute("aria-label", "Cambiar la fuente");
+fuente.setAttribute("title", "Cambiar la fuente de nuestra aplicacion");
 contenedor.appendChild(fuente);
 
 // Crear la lista de fuentes (ul) y agregarle la clase
@@ -97,6 +100,7 @@ document.querySelector("body").appendChild(listaFuentes);
 let disminuir = document.createElement("button");
 disminuir.textContent = "-";
 disminuir.setAttribute("aria-label", "Disminuir el tamaño de la fuente");
+disminuir.setAttribute("title", "Reducir el tamaño de la fuente");
 contenedor.appendChild(disminuir);
 disminuir.onclick = function () {
     tamanio *= 0.9;
@@ -125,6 +129,7 @@ document.body.appendChild(mensaje4);
 let voz = document.createElement("button");
 voz.textContent = "🎤";
 voz.setAttribute("aria-label", "Comandos de voz");
+voz.setAttribute("title", "Activar comandos de voz");
 contenedor.appendChild(voz);
 
 voz.onclick = function () {
