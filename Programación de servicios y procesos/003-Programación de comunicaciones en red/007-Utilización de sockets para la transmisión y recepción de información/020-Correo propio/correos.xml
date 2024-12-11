@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<correos>
+  
+  
+  <correo>
+    
+    
+    <Asunto>asdad</Asunto>
+    
+    
+    <De>localhost@example.com</De>
+    
+    
+    <Para>asdasda</Para>
+    
+    
+    <Cuerpo>asdasd</Cuerpo>
+    
+    
+    <Fecha>2024-12-11 11:45:22</Fecha>
+    
+  
+  </correo>
+  
+
+  <correo>
+    <Asunto>Paco</Asunto>
+    <De>localhost@example.com</De>
+    <Para>Juanito</Para>
+    <Cuerpo>Te amo</Cuerpo>
+    <Fecha>2024-12-11 11:45:45</Fecha>
+  </correo>
+</correos>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                background: rgb(240, 240, 240);
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            nav {
+                width: 20%;
+                background: white;
+                box-sizing: border-box;
+                padding: 20px;
+            }
+            nav ul {
+                list-style-type: none;
+            }
+            nav ul li {
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+            main {
+                width: 80%;
+                padding: 20px;
+            }
+            article {
+                background: white;
+                padding: 20px;
+                border: 1px solid gray;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 10px;
+            }
+            #enviar {
+                display: none;
+            }
+            textarea {
+                width: 100%;
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li id="nuevocorreo">Nuevo correo</li>
+                <li id="bandejaentrada">Bandeja de entrada</li>
+            </ul>
+        </nav>
+        <main>
+            <div id="enviar">
+                <article>
+                    <h3>Asunto:</h3>
+                    <input type="text" id="asunto" />
+                    <h4>Para:</h4>
+                    <input type="text" id="para" />
+                    <p>Mensaje:</p>
+                    <textarea id="mensaje"></textarea>
+                    <button id="botonEnviar">Enviar</button>
+                </article>
+            </div>
+            <div id="bandeja"></div>
+            <template id="correo">
+                <article>
+                    <h3>Asunto: <span class="asunto"></span></h3>
+                    <h4>De: <span class="de"></span></h4>
+                    <p class="cuerpo"></p>
+                </article>
+            </template>
+        </main>
+        <script>
+            const botonEnviar = document.getElementById("botonEnviar");
+            const bandejaDiv = document.getElementById("bandeja");
+            const enviarDiv = document.getElementById("enviar");
+            const plantillaCorreo = document.getElementById("correo");
+
+            document.getElementById("nuevocorreo").onclick = function () {
+                enviarDiv.style.display = "block";
+                bandejaDiv.style.display = "none";
+            };
+
+            document.getElementById("bandejaentrada").onclick = function () {
+                enviarDiv.style.display = "none";
+                bandejaDiv.style.display = "block";
+                cargarCorreos();
+            };
+
+            const BASE_URL = "http://localhost:5000";
+
+            botonEnviar.onclick = function () {
+                const asunto = document.getElementById("asunto").value;
+                const para = document.getElementById("para").value;
+                const mensaje = document.getElementById("mensaje").value;
+
+                if (!asunto || !para || !mensaje) {
+                    alert("Por favor, completa todos los campos.");
+                    return;
+                }
+
+                fetch(`${BASE_URL}/enviar`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ asunto, para, mensaje })
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Respuesta del servidor:", data);
+                        alert(data.mensaje);
+                        enviarDiv.style.display = "none";
+                        bandejaDiv.style.display = "block";
+                        cargarCorreos();
+                    })
+                    .catch((error) => {
+                        console.error("Error al enviar el correo:", error);
+                        alert(`Ocurrió un error: ${error.message || error}`); // Mostrar el error detallado
+                    });
+            };
+
+            function cargarCorreos() {
+                bandejaDiv.innerHTML = "";
+
+                fetch(`${BASE_URL}/recibir`)
+                    .then((response) => response.json())
+                    .then((correos) => {
+                        correos.forEach((correo) => {
+                            const correoElement = plantillaCorreo.content.cloneNode(true);
+                            correoElement.querySelector(".asunto").textContent = correo.Asunto;
+                            correoElement.querySelector(".de").textContent = correo.De;
+                            correoElement.querySelector(".cuerpo").textContent = correo.Cuerpo;
+                            bandejaDiv.appendChild(correoElement);
+                        });
+                    })
+                    .catch((error) => console.error("Error al cargar correos:", error));
+            }
+
+            cargarCorreos();
+        </script>
+    </body>
+</html>
