@@ -5,29 +5,29 @@
   <correo>
     
     
-    <Asunto>asdad</Asunto>
+    <Asunto>Ejemplo video</Asunto>
     
     
     <De>localhost@example.com</De>
     
     
-    <Para>asdasda</Para>
+    <Para>Mis espectadores</Para>
     
     
-    <Cuerpo>asdasd</Cuerpo>
+    <Cuerpo>Muchas gracias por ver este video donde aprendemos a trabajar primero con sockets, luego con compresion de imagenes y decompresion y por ultimo un servicio de correo en localhost con un servidor Flask.</Cuerpo>
     
     
-    <Fecha>2024-12-11 11:45:22</Fecha>
+    <Fecha>2024-12-12 11:31:19</Fecha>
     
   
   </correo>
   
 
   <correo>
-    <Asunto>Paco</Asunto>
+    <Asunto>Hola que tal</Asunto>
     <De>localhost@example.com</De>
-    <Para>Juanito</Para>
-    <Cuerpo>Te amo</Cuerpo>
-    <Fecha>2024-12-11 11:45:45</Fecha>
+    <Para>Video</Para>
+    <Cuerpo>Estamos aqui en el video</Cuerpo>
+    <Fecha>2024-12-12 11:40:33</Fecha>
   </correo>
 </correos>
