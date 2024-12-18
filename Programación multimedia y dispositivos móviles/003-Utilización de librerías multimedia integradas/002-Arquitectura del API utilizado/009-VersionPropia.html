@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Captura de Pantalla</title>
+</head>
+<body>
+    <button id="startCapture">Iniciar Captura</button> <!-- Botón para iniciar la captura -->
+    <script>
+        let stream;
+
+        async function captureScreen() {
+            try {
+                // Solicitar compartir pantalla
+                stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+
+                // Crear un elemento de video para mostrar la captura
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.autoplay = true;
+                document.body.appendChild(video);
+
+            } catch (error) {
+                console.error("Error al capturar la pantalla:", error);
+            }
+        }
+
+        // Vincular función al botón
+        document.getElementById('startCapture').addEventListener('click', captureScreen);
+    </script>
+</body>
+</html>
+
+

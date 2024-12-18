@@ -1,0 +1,156 @@
+.jvideo {
+	width: 600px;
+	height: 320px;
+	border: 1px solid #ccc;
+	position: relative;
+	margin: 20px auto;
+	background: #000;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.jvideo video {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	transition: filter 0.3s ease;
+}
+
+.jvideo .barracontroles {
+	position: absolute;
+	width: 400px;
+	height: 36px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 30px;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: space-between; /* Asegura que los botones se distribuyan de manera equitativa */
+	align-items: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	padding: 0 10px; /* Añadimos un poco de espacio entre los botones */
+}
+
+.jvideo .barracontroles button {
+	width: 36px;
+	height: 36px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.jvideo .barracontroles button:hover {
+	transform: scale(1.1);
+}
+
+.jvideo .barracontroles button img {
+	width: 100%;
+	height: auto;
+}
+
+.jvideo .barraprogreso {
+	position: absolute;
+	width: 500px;
+	height: 10px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 30px;
+	bottom: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: hidden;
+	box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.6);
+}
+
+.jvideo .barraprogreso .progreso {
+	width: 50%;
+	background: #6c757d;
+	height: 100%;
+	transition: width 0.1s ease;
+}
+
+/* Estilos para el display del tiempo (fuera de la barra de botones) */
+.jvideo .tiempo {
+	font-size: 16px;
+	color: #fff;
+	position: absolute;
+	left: 20px;
+	bottom: 40px; /* Se mueve fuera de la barra de botones */
+	font-family: Arial, sans-serif;
+	background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro para mejorar la visibilidad */
+	padding: 2px 6px;
+	border-radius: 5px;
+}
+
+/* Estilo para los controles cuando están ocultos */
+.jvideo .barracontroles {
+	opacity: 0; /* Ocultamos los controles inicialmente */
+	transition: opacity 0.3s ease;
+}
+
+/* Mostrar controles cuando el ratón entra en el área del video */
+.jvideo:hover .barracontroles {
+	opacity: 1; /* Los controles aparecen cuando el ratón está sobre el video */
+}
+
+/* Estilos para el botón de velocidad */
+.jvideo .barracontroles .velocidad-btn {
+	width: 36px;
+	height: 36px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+/* Estilo para el menú desplegable de velocidad fuera de la barra de botones */
+.menu-velocidad {
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px 0;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Se mantiene oculto hasta que se haga clic */
+    top: -150px; /* Alineamos al borde superior del botón */
+    left: 100%; /* Posicionamos el menú a la derecha del botón */
+    margin-left: 10px; /* Agregamos espacio entre el botón y el menú */
+}
+
+/* Estilo para las opciones del menú */
+.menu-velocidad li {
+    padding: 8px;
+    cursor: pointer;
+    color: black;
+    text-align: center;
+}
+
+.menu-velocidad li:hover {
+    background-color: #f0f0f0; /* Cambiar color al pasar el ratón */
+}
+
+
+/* Estilos para el botón de velocidad */
+.velocidad-btn {
+	width: 36px;
+	height: 36px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+/* Efecto al pasar el ratón sobre el botón */
+.velocidad-btn:hover {
+	transform: scale(1.1);
+}
+
+/* Estilo para la imagen dentro del botón */
+.velocidad-btn img {
+	width: 100%;
+	height: auto;
+}
