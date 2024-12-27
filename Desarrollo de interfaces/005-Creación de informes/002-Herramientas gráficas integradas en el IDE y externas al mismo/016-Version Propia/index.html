@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="Stylesheet" href="lib/jvtabla/jvtabla.css" />
+    </head>
+    <body>
+        <div>
+            <input type="text" id="buscador" placeholder="Buscar..." />
+        </div>
+        <table class="jvtabla">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Este cuerpo será llenado dinámicamente -->
+            </tbody>
+        </table>
+        <button id="exportCSV">Exportar a CSV</button>
+        <script src="lib/jvtabla/jvtabla.js"></script>
+        <script src="lib/jvtabla/loadData.js"></script>
+    </body>
+</html>

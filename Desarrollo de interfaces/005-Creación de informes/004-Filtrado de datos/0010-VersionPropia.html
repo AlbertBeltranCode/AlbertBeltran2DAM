@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input:focus {
+            border-color: #6c7ae0;
+            outline: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .ok {
+            background-color: #d4edda;
+        }
+
+        .ko {
+            background-color: #f8d7da;
+        }
+
+        .validacion-msg {
+            font-size: 14px;
+            color: #dc3545;
+            margin-top: 5px;
+        }
+
+        .validacion-msg.success {
+            color: #28a745;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6c7ae0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #505bbf;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulario de Registro</h2>
+        
+        <form id="formulario" action="guardar_xml.php" method="POST">
+            <div class="form-group">
+                <label for="dni">DNI</label>
+                <input type="text" id="dni" name="dni" jvvalidador="dni" placeholder="Ej: 11111111J" required>
+                <div id="validacion-dni" class="validacion-msg"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="iban">IBAN</label>
+                <input type="text" id="iban" name="iban" jvvalidador="iban" placeholder="Ej: ES9121000418450200051332" required>
+                <div id="validacion-iban" class="validacion-msg"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="cp">Código Postal</label>
+                <input type="text" id="cp" name="cp" jvvalidador="cp" placeholder="Ej: 12345" required>
+                <div id="validacion-cp" class="validacion-msg"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" jvvalidador="email" placeholder="Ej: ejemplo@dominio.com" required>
+                <div id="validacion-email" class="validacion-msg"></div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const entradas = document.querySelectorAll('input');
+        const validadores = Array.from(entradas).filter(input => input.getAttribute('jvvalidador') !== null);
+        validadores.forEach(function(validador){
+            validador.onblur = function(){
+                switch(this.getAttribute("jvvalidador")){
+                    case "dni":
+                        validar(/^[0-9]{8}[A-Z]$/,this,this.value, 'dni');
+                        break;
+                    case "iban":
+                        validarIBAN(this);
+                        break;
+                    case "cp":
+                        validar(/^\d{5}$/,this,this.value, 'cp');
+                        break;
+                    case "email":
+                        validar(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, this, this.value, 'email');
+                        break;
+                }
+            }
+        });
+
+        function validar(miregex, elemento, valor, tipo){
+            const regex = miregex;
+            const mensaje = document.getElementById(`validacion-${tipo}`);
+            if(regex.test(valor)){
+                elemento.classList.remove("ko");
+                elemento.classList.add("ok");
+                mensaje.textContent = `El ${tipo} es válido.`;
+                mensaje.style.color = 'green';
+            } else {
+                elemento.classList.remove("ok");
+                elemento.classList.add("ko");
+                let instruccion = '';
+                if (tipo === 'dni') {
+                    instruccion = 'Introduce un DNI con 8 dígitos seguidos de una letra mayúscula.';
+                } else if (tipo === 'cp') {
+                    instruccion = 'Introduce un Código Postal de 5 dígitos.';
+                } else if (tipo === 'email') {
+                    instruccion = 'Introduce un correo electrónico con formato correcto, como ejemplo@dominio.com.';
+                }
+                mensaje.textContent = `El ${tipo} no es válido. ${instruccion}`;
+                mensaje.style.color = 'red';
+            }
+        }
+
+        function validarIBAN(elemento) {
+            const valor = elemento.value;
+            const mensaje = document.getElementById('validacion-iban');
+            const expectedLength = 24;
+            const currentLength = valor.length;
+
+            if (/^ES\d{22}$/.test(valor)) {
+                elemento.classList.remove("ko");
+                elemento.classList.add("ok");
+                mensaje.textContent = `El IBAN es válido.`;
+                mensaje.style.color = 'green';
+            } else {
+                elemento.classList.remove("ok");
+                elemento.classList.add("ko");
+
+                let instruccion = 'Introduce un IBAN con el formato correcto. Debe comenzar con "ES" seguido de 22 dígitos.';
+                if (currentLength < expectedLength) {
+                    const falta = expectedLength - currentLength;
+                    mensaje.textContent = `El IBAN es incorrecto, te faltan ${falta} dígitos. ${instruccion}`;
+                } else if (currentLength > expectedLength) {
+                    const sobra = currentLength - expectedLength;
+                    mensaje.textContent = `El IBAN es incorrecto, te sobran ${sobra} dígitos. ${instruccion}`;
+                } else {
+                    mensaje.textContent = `El IBAN no es válido. ${instruccion}`;
+                }
+                mensaje.style.color = 'red';
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
