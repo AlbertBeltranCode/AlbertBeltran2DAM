@@ -1,6 +1,36 @@
+<link rel="stylesheet" href="styles.css">
+<h1>Formulario de insercion</h1>
 <form action="api.php?o=insertarCliente" method="POST">
-	<input type="text" name="nombre">
-	<input type="text" name="apellidos">
+	<input type="text" name="nombre" placeholder="Nombre">
+	<input type="text" name="apellidos" placeholder="Apellidos">
+	<input type="text" name="email" placeholder="Correo Electronico">
+	<input type="text" name="direccion" placeholder="Direccion">
+	<input type="text" name="poblacion" placeholder="Poblacion">
+	<input type="number" name="cp" placeholder="Codigo Postal">
+	<input type="text" name="pais" placeholder="Pais">
+	<input type="text" name="texto" placeholder="Sobre Mi">
 	<input type="hidden" name="clave" value="falkfawer465a">
 	<input type="submit">
+</form>
+<form action="api.php" method="GET">
+    <input type="hidden" name="o" value="clientes">
+    <button type="button" id="mostrarPedidos">Mostrar Clientes y Pedidos</button>
+	<div id="resultado"></div>
+	<script>
+		document.getElementById('mostrarPedidos').addEventListener('click', function () {
+    // Realiza la solicitud AJAX
+    fetch('http://localhost/dam2/AlbertBeltran2DAM/Programaci%c3%b3n%20de%20servicios%20y%20procesos/004-Generaci%c3%b3n%20de%20servicios%20en%20red/001-Protocolos%20est%c3%a1ndar%20de%20comunicaci%c3%b3n%20en%20red%20a%20nivel%20de%20aplicaci%c3%b3n/012-reorganizar/inc/damepedidos.php')
+        .then(response => response.text()) // Esperamos HTML en lugar de JSON
+        .then(data => {
+            let resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = data; // Simplemente insertamos el HTML de la tabla en el div
+        })
+        .catch(error => {
+            console.error("Error al cargar los datos:", error);
+            document.getElementById('resultado').innerHTML = "<p>Error al cargar los datos.</p>";
+        });
+});
+
+		</script>
+		
 </form>

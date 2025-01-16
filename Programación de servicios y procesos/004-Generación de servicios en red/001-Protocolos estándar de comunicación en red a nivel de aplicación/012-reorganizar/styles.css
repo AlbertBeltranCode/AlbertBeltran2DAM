@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Fondo negro */
+    font-family: 'Arial', sans-serif;
+    color: #ffffff; /* Texto blanco */
+    display: flex;
+    flex-direction: column; /* Apila los elementos en una columna */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+form {
+    max-width: 400px;
+    width: 90%;
+    padding: 20px;
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a); /* Fondo del formulario */
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(245, 241, 241, 0.5), 0 -2px 20px rgba(255, 255, 255, 0.05);
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="submit"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff; /* Texto blanco */
+    background: linear-gradient(145deg, #2a2a2a, #1e1e1e); /* Fondo del input */
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5), inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus {
+    outline: none;
+    background: linear-gradient(145deg, #3a3a3a, #2e2e2e); /* Cambio de color al enfocarse */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Efecto luminoso */
+}
+
+form input[type="submit"] {
+    cursor: pointer;
+    background: linear-gradient(145deg, #007bff, #0056b3); /* Botón moderno azul */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), -2px -2px 5px rgba(255, 255, 255, 0.05);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background: linear-gradient(145deg, #0056b3, #003f7f); /* Cambio de color al pasar el ratón */
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.8); /* Brillo al pasar el ratón */
+}
+
+form input::placeholder {
+    color: #cccccc; /* Color tenue para el placeholder */
+    font-style: italic;
+}
+
+form input[type="hidden"] {
+    display: none;
+}
+
+h1 {
+    font-size: 2rem; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    color: #ffffff; /* Color blanco */
+    text-align: center; /* Centrado */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.2); /* Sombra de texto */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
