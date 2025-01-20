@@ -1,13 +1,86 @@
-body{
-	padding:20px;
+/* Reset básico */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
-.coche{
-	border:1px solid grey;
-	border-radius:20px;
-	box-sizing:border-box;
-	padding:20px;
-	margin-bottom:20px;
+
+/* Encabezado principal */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    color: #0d47a1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    text-align: center;
 }
-.coche img{
-	width:100%;
+
+/* Contenedor de cada coche */
+.coche {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.coche:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen del coche */
+.coche img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Título */
+.coche h3 {
+    font-size: 1.5rem;
+    color: #0d47a1;
+    margin: 0 0 10px 0;
+}
+
+/* Descripción */
+.coche .descripcion {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+/* Precio */
+.coche .precio {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #388e3c;
+}
+
+/* Adaptabilidad */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .coche {
+        padding: 15px;
+    }
+    .coche h3 {
+        font-size: 1.25rem;
+    }
+    .coche .precio {
+        font-size: 1rem;
+    }
 }

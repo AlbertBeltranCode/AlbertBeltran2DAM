@@ -1,5 +1,5 @@
 window.onload = function(){
-	fetch("http://192.168.1.210/dam/Segundo/Sistemas%20de%20gesti%C3%B3n%20empresarial/proyecto/114-endpoint%20publico/endpointpublico/")
+	fetch("http://localhost/dam2/AlbertBeltran2DAM/Sistemas%20de%20gesti%c3%b3n%20empresarial/proyecto/114-endpoint%20publico/endpointpublico/")
 	.then(function(result){
 		return result.json()
 	})
