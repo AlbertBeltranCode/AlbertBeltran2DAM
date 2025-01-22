@@ -2,10 +2,11 @@
 
 	include "lib/sanear.php";
 	sanear($_REQUEST);
+	/*
 	$json = file_get_contents('php://input');                   								// Recojo los datos que vienen en json desde la petición del cliente
    $datos = json_decode($json, true);
 	sanear($datos);
-	
+	*/
 	include "lib/fuerzabruta.php";
 	include "lib/codificador.php";
 	ini_set('display_errors', 1);																								// Activo errores

@@ -1,0 +1,113 @@
+/* Estilo general */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #004d3f, #009B77); /* Fondo degradado basado en #009B77 */
+    color: #ffffff;
+    margin: 0;
+    padding: 20px; /* Espaciado interno para separar del borde */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea todo al lado izquierdo */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Título principal */
+h1 {
+    font-size: 28px;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+}
+
+/* Contenedor de la tabla */
+table {
+    width: 100%; /* Asegura que la tabla ocupe todo el espacio disponible */
+    max-width: 1200px;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* Efecto de cristal */
+}
+
+/* Estilo de las cabeceras */
+thead tr {
+    background: rgba(0, 155, 119, 0.8); /* Verde basado en #009B77 */
+    text-align: left;
+}
+
+thead th {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 15px;
+    letter-spacing: 2px;
+}
+
+/* Estilo de las filas */
+tbody tr {
+    transition: background 0.3s;
+}
+
+tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.05); /* Alterna colores */
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:hover {
+    background: rgba(0, 155, 119, 0.2); /* Resalta fila al pasar el cursor */
+}
+
+/* Estilo de las celdas */
+td {
+    padding: 15px;
+    font-size: 14px;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Borrar última línea */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Añadir animaciones */
+table {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Efectos adicionales en pantalla móvil */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    thead th {
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+    }
+}

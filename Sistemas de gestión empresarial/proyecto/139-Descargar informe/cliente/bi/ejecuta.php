@@ -17,7 +17,7 @@
         border: 1px solid #ddd;
     }
     th {
-        background-color: crimson;
+        background-color: #009B77;
         color: white;
     }
     tr:nth-child(even) {

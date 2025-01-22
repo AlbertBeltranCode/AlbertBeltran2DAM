@@ -8,13 +8,13 @@
     </title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="estilologin.css">
-    <link rel="icon" type="image/png" sizes="512x512" href="img/crimsonlogo.png">
-    <link rel="shortcut icon" href="img/crimsonlogo.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png">
     <script src="login.js"></script>
   </head>
   <body>
     <div id="formlogin">
-      <img src="img/crimsonlogo.png" id="logo">
+      <img src="img/logo.png" id="logo">
       <input type="text" id="usuario" placeholder="<?php echo $idioma['usuario']['contenido']?>">
       <input type="text" id="contrasena" placeholder="<?php echo $idioma['contrasena']['contenido']?>">
       <button id="login"><?php echo $idioma['login']['contenido']?></button>

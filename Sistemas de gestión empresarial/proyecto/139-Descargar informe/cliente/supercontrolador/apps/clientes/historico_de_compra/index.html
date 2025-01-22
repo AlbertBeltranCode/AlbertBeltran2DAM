@@ -1,1 +1,69 @@
-<h4>Si estas viendo esto es el historico de compra</h4>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Cliente</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Detalle del Cliente</h1>
+    <div id="info-detalle"></div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const entidad = params.get("entidad");
+        const id = params.get("id");
+        console.log("LA entidad es", entidad);
+        console.log("El id es", id);
+
+        fetch(`../../../../../servidor/get_info_pedido.php?tabla=${entidad}&id=${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                if (data.error) {
+                    document.getElementById('info-detalle').textContent = data.error;
+                } else {
+                    mostrarDatos(data);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('info-detalle').textContent = 'Error al cargar los datos.';
+            });
+
+            function mostrarDatos(data) {
+    let contenido = "<table><thead><tr>";
+    if (data.length > 0) {
+        // Generar encabezados de tabla
+        contenido += "<th>Fecha del Pedido</th><th>Producto</th><th>Cantidad</th>";
+        contenido += "</tr></thead><tbody>";
+        // Generar filas de datos
+        data.forEach(row => {
+            contenido += "<tr>";
+            contenido += `<td>${row.FechaPedido}</td>`;
+            contenido += `<td>${row.Producto}</td>`;
+            contenido += `<td>${row.Cantidad}</td>`;
+            contenido += "</tr>";
+        });
+        contenido += "</tbody></table>";
+    } else {
+        contenido = "No se encontraron pedidos para este cliente.";
+    }
+    document.getElementById('info-detalle').innerHTML = contenido;
+}
+
+
+
+        
+        
+    </script>
+</body>
+</html>
+
+</html>
