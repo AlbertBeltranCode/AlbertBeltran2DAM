@@ -1,7 +1,7 @@
 db.clientes.updateOne(
-		{nombre:"Jose Vicente"},
+		{nombre:"Albert"},
 		{ 
-			$set: { nombre: "Juan" } 
+			$set: { nombre: "Paco" } 
 		}
 	
 )

@@ -1,1 +1,1 @@
-db.clientes.insertOne({nombre:"Jose Vicente",apellidos:"Carratala Sanchis"})
+db.clientes.insertOne({nombre:"Albert",apellidos:"Beltran Carbonell"})

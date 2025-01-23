@@ -7,9 +7,9 @@ $namespace = "empresa.clientes";
 $bulk = new MongoDB\Driver\BulkWrite;
 
 $documento = [
-    'nombre' => 'Juan Pérez',
-    'email' => 'juan.perez@example.com',
-    'edad' => 30
+    'nombre' => 'Albert',
+    'email' => 'albert@correo.com',
+    'edad' => 26
 ];
 
 $bulk->insert($documento);

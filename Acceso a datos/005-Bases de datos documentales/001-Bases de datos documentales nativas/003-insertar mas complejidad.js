@@ -1,14 +1,14 @@
 db.clientes.insertOne(
 	{
-		nombre:"Jose Vicente",
-		apellidos:"Carratala Sanchis",
+		nombre:"Albert",
+		apellidos:"Beltran Carbonell",
 		correos:[
 			{	
 				tipo:'personal',
-				correo:'info@josevicentecarratala.com'
+				correo:'info@albert.com'
 			},{	
 				tipo:'trabajo',
-				correo:'info@jocarsa.com'
+				correo:'albert@correo.com'
 			}]
 	}
 )

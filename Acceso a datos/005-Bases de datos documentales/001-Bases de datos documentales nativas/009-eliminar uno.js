@@ -1,5 +1,5 @@
 db.clientes.deleteOne(
-		{nombre:"Juan"}
+		{nombre:"Manolo"}
 		
 	
 )

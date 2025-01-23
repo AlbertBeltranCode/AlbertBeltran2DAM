@@ -5,11 +5,11 @@ basededatos = cliente["empresa"]                        # Reemplaza con el nombr
 coleccion = basededatos["clientes"]                     # Reemplaza con el nombre de tu colección
 
 cliente = {
-    "nombre":"David Manuel",
-    "apellidos":"Gonzalez Garcia",
+    "nombre":"Albert",
+    "apellidos":"Beltran Carbonell",
     "correos":[
-            {'tipo':'personal','correo':'david@gmail.com'},
-            {'tipo':'trabajo','correo':'david@hotmail.com'}
+            {'tipo':'personal','correo':'albert@gmail.com'},
+            {'tipo':'trabajo','correo':'albert@hotmail.com'}
         ]
     }
 

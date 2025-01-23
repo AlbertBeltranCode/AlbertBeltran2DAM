@@ -1,1 +1,1 @@
-db.clientes.find({nombre:"Jose Vicente"})
+db.clientes.find({nombre:"Albert"})

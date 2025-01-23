@@ -4,7 +4,7 @@ cliente = MongoClient("mongodb://localhost:27017/")     # Cambia la URL si tu Mo
 basededatos = cliente["empresa"]                        # Reemplaza con el nombre de tu base de datos
 coleccion = basededatos["clientes"]                     # Reemplaza con el nombre de tu colección
 
-resultado = coleccion.find_one({"nombre": "Juan"})     # Reemplaza "campo" y "valor" por el criterio de búsqueda
+resultado = coleccion.find_one({"nombre": "Albert"})     # Reemplaza "campo" y "valor" por el criterio de búsqueda
 
 if resultado:
     print("Documento encontrado:", resultado)

@@ -1,6 +1,6 @@
 <?php
 
-$contrasena = "Jose Vicente";
+$contrasena = "Albert";
 echo "La contraseña sin encriptar  es ".$contrasena."<br>";
 $encriptado = base64_encode($contrasena);
 echo "La contraseña encriptada es ".$encriptado."<br>";

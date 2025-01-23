@@ -1,7 +1,7 @@
 db.clientes.updateMany(
-		{nombre:"Jose Vicente"},
+		{nombre:"Albert"},
 		{ 
-			$set: { nombre: "Juan" } 
+			$set: { nombre: "Manolo" } 
 		}
 	
 )

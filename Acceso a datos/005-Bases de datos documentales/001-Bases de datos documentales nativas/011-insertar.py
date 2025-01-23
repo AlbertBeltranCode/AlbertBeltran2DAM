@@ -4,7 +4,7 @@ cliente = MongoClient("mongodb://localhost:27017/")     # Cambia la URL si tu Mo
 basededatos = cliente["empresa"]                        # Reemplaza con el nombre de tu base de datos
 coleccion = basededatos["clientes"]                     # Reemplaza con el nombre de tu colección
 
-cliente = {"nombre":"Juan Carlos","apellidos":"Jimenez Garcia"}
+cliente = {"nombre":"Albert","apellidos":"Beltran Carbonell"}
 
 resultado = coleccion.insert_one(cliente)     
 

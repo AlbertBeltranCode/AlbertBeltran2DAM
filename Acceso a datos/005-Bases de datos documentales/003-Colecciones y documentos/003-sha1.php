@@ -1,6 +1,6 @@
 <?php
 	
-	$contrasena = "Jose Vicente";
+	$contrasena = "Albert";
 	$picadillo0 = md5($contrasena);
 	$picadillo = sha1($contrasena);
 	$picadillo2 = sha1($contrasena);

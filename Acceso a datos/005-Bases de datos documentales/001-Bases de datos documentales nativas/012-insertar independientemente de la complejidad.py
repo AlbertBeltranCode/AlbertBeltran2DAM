@@ -5,9 +5,9 @@ basededatos = cliente["empresa"]                        # Reemplaza con el nombr
 coleccion = basededatos["clientes"]                     # Reemplaza con el nombre de tu colección
 
 cliente = {
-    "nombre":"David Manuel",
-    "apellidos":"Gonzalez Garcia",
-    "correos":['david@gmail.com','david@hotmail.com']
+    "nombre":"Albert",
+    "apellidos":"Beltran Carbonell",
+    "correos":['albert@gmail.com','albert@hotmail.com']
     }
 
 resultado = coleccion.insert_one(cliente)     

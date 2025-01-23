@@ -1,6 +1,6 @@
 <?php
 
-$contrasena = "Jose Vicente";
+$contrasena = "Albert";
 
 function codifica($entrada){
 	for($i = 0;$i<strlen($entrada);$i++){

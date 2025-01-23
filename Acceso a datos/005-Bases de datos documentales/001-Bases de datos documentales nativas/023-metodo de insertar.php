@@ -42,9 +42,9 @@
 $conexion = new ConectaMongo();
 
 $documento = [
-    'nombre' => 'Juan Pérez',
-    'email' => 'juan.perez@example.com',
-    'edad' => 30
+    'nombre' => 'Albert',
+    'email' => 'albert@example.com',
+    'edad' => 26
 ];
 
 $conexion->insertar("clientes",$documento);

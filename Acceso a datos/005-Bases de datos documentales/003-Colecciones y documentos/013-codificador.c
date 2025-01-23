@@ -125,7 +125,7 @@ char *descodifica(const char *entrada) {
 }
 
 int main() {
-    const char *contrasena = "Jose Vicente";
+    const char *contrasena = "Albert";
     printf("La contraseña es: %s\n", contrasena);
 
     char *codificado = codifica(contrasena);
