@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<root>
+  <staticData>
+    <customerName>Ejemplo Video</customerName>
+    <Apellidos>VideoMagico</Apellidos>
+    <Email>video@correo.com</Email>
+  </staticData>
+  <dynamicData/>
+</root>
