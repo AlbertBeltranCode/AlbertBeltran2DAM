@@ -1,0 +1,4 @@
+('192.168.1.210', 59304): hola
+('127.0.0.1', 51264): Me gustan las mazorcas
+('127.0.0.1', 51284): Este mensaje es magico
+('127.0.0.1', 51304): Holiwi uwu

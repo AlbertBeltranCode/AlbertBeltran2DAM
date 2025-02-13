@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jocarsa | Greenyellow</title>
+  <style>
+    /* Estilo del título corporativo */
+h1.corporate-title {
+  background-color: #4CAF50; /* Verde elegante */
+  color: #fff;
+  text-align: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 2.5em;
+  margin: 0;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 0 0;
+}
+
+/* Estilo del cuerpo de la página */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Estilo del div editable */
+#entrada {
+  width: 100%;
+  max-width: 600px;
+  min-height: 200px;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 0 0 8px 8px;
+  outline: none;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-top: -10px;
+}
+#entrada:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+
+/* Estilo del texto predictivo */
+.predictive-text {
+  color: #aaa;
+  font-style: italic;
+  pointer-events: none;
+}
+
+  </style>
+</head>
+<body>
+
+  <h1 class="corporate-title">jocarsa | greenyellow</h1>
+
+  <div id="entrada" contenteditable="true" placeholder="Type something..."></div>
+
+  <script>
+    const entrada = document.querySelector("#entrada");
+
+    /**
+     * Busca sugerencias basadas en las dos últimas palabras del contenido editable.
+     * Se dispara al soltar la barra espaciadora.
+     */
+    function busca() {
+      let contenido = entrada.textContent.trim();
+      let palabras = contenido.split(" ");
+      // Obtener las dos últimas palabras
+      let dosultimas = palabras.slice(-2).join(" ");
+
+      let codificado = encodeURI(dosultimas);
+
+      fetch("predictivo2.php?entrada=" + codificado)
+        .then(response => response.json())
+        .then(datos => {
+          // Eliminar cualquier texto predictivo existente
+          const existingPredictiveText = entrada.querySelector(".predictive-text");
+          if (existingPredictiveText) {
+            existingPredictiveText.remove();
+          }
+
+          if (Array.isArray(datos) && datos.length > 0) {
+            // Encontrar la sugerencia más común
+            const mostCommon = datos.reduce((acc, curr) => {
+              acc[curr] = (acc[curr] || 0) + 1;
+              return acc;
+            }, {});
+            const suggestion = Object.keys(mostCommon).reduce((a, b) => 
+              mostCommon[a] > mostCommon[b] ? a : b
+            );
+
+            // Agregar la sugerencia como texto gris
+            const predictiveText = document.createElement("span");
+            predictiveText.className = "predictive-text";
+            predictiveText.textContent = suggestion;
+            entrada.appendChild(predictiveText);
+
+            // Posicionar el cursor al final del contenido
+            const range = document.createRange();
+            const selection = window.getSelection();
+            range.selectNodeContents(entrada);
+            range.collapse(false);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+
+    // Disparar la sugerencia al soltar la tecla espacio
+    entrada.addEventListener("keyup", function(event) {
+      if (event.key === " " || event.keyCode === 32) {
+        busca();
+      }
+    });
+
+    // Manejar la tecla Tab para aceptar la sugerencia
+    entrada.addEventListener("keydown", function(event) {
+  if (event.key === "Tab") {
+    event.preventDefault(); // Prevenir el comportamiento por defecto del Tab
+    const predictiveText = entrada.querySelector(".predictive-text");
+    if (predictiveText) {
+      const suggestion = predictiveText.textContent;
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        let range = selection.getRangeAt(0);
+        
+        // Verificar si se necesita un espacio previo
+        let textBeforeCaret = "";
+        if (range.startContainer.nodeType === Node.TEXT_NODE) {
+          textBeforeCaret = range.startContainer.data.slice(0, range.startOffset);
+        }
+        // Si el último carácter no es un espacio y no está vacío, se añade uno
+        let prefix = "";
+        if (textBeforeCaret.length > 0 && textBeforeCaret.slice(-1) !== " ") {
+          prefix = " ";
+        }
+        
+        // Crear un nodo de texto con el espacio (si es necesario) y la sugerencia
+        const textToInsert = document.createTextNode(prefix + suggestion);
+        // Insertar el nodo en la posición del cursor
+        range.insertNode(textToInsert);
+        
+        // Reposicionar el cursor al final del texto insertado
+        range = document.createRange();
+        range.setStartAfter(textToInsert);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      // Eliminar el span de texto predictivo
+      predictiveText.remove();
+    }
+  }
+});
+  </script>
+</body>
+</html>

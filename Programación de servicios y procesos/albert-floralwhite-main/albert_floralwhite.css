@@ -1,0 +1,72 @@
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+}
+
+#chart-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e4e8;
+}
+
+.jocarsa-floralwhite-node rect {
+  cursor: pointer;
+  transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.jocarsa-floralwhite-node rect:hover {
+  fill: #ff9800;
+  transform: scale(1.05);
+}
+
+.jocarsa-floralwhite-node text {
+  font-size: 14px;
+  fill: #555;
+  font-weight: 600;
+  pointer-events: none;
+  user-select: none;
+}
+
+.jocarsa-floralwhite-link {
+  cursor: pointer;
+  stroke-opacity: 0.6;
+  transition: stroke-opacity 0.3s ease, stroke-width 0.3s ease;
+}
+
+.jocarsa-floralwhite-link:hover {
+  stroke-opacity: 1;
+  stroke-width: 12px;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #444;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #444 transparent transparent transparent;
+}
