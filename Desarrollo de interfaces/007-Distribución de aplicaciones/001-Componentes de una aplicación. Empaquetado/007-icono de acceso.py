@@ -267,7 +267,7 @@ class SuccessScreen(tk.Frame):
     def create_shortcut(self):
         current_os = platform.system()
         target_path = os.path.join(self.parent.install_path.get(), "main.py")
-        shortcut_name = "My Application"  # You can customize the shortcut name
+        shortcut_name = "Exif app"  # You can customize the shortcut name
         
         if not os.path.isfile(target_path):
             messagebox.showerror("Error", f"Cannot find 'main.py' in '{self.parent.install_path.get()}'. Cannot create shortcut.")
