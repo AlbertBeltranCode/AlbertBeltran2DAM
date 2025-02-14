@@ -15,7 +15,7 @@ class JVGrafica{
 	 //lienzo.style.border = "1px solid grey";                // Un poco de estilo
 	 let contexto = lienzo.getContext("2d");                // creo un contexto en el que dibujar
 	 let variacioncolor = 100;
-	 let micolor = this.hexToRgb(this.color);
+	 let micolor = this.hexToRgb("#009B77");
 	 let alturaletra = 15;
 
 	 document.querySelector(this.selector).appendChild(lienzo);
@@ -88,9 +88,9 @@ anillo() {
 	 //lienzo.style.border = "1px solid grey";                // Un poco de estilo
 	 let contexto = lienzo.getContext("2d");                // creo un contexto en el que dibujar
 	 let variacioncolor = 100;
-	 let micolor = this.hexToRgb(this.color);
+	 let micolor = this.hexToRgb("#009B77");
 	 let alturaletra = 20;
-	 let misupercolor = this.color
+	 let misupercolor = "#009B77"
 	 let misupertitulo = this.titulo
 	 contexto.font = "20px sans-serif"
 

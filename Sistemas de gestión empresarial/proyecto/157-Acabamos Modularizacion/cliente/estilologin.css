@@ -1,70 +1,65 @@
-/* Archivo que contiene los estilos generales aplicados en el login de la aplicación */
 @font-face {
-  font-family: Ubuntu;
-  src: url(Ubuntu-R.ttf);
-}
-body{
-  font-family:Ubuntu,sans-serif;
-  background:crimson;
-}
-#formlogin{
-  width:300px;
-  height:380px;
-  margin:auto;
-  margin-top:100px;
-  background:white;
-  padding:30px;
-  text-align:center;
-}
-#logo{
-  width:50%;
-}
-input,button{
-  width:100%;
-  padding:10px 0px;
-  margin-bottom:10px;
-  margin-top:10px;
-  border:none;
-  border-bottom:2px solid crimson;
-  transition:all 1s;
-  font-family:Ubuntu,sans-serif;
-}
-input:focus{
-	outline:none;
-	background:crimson;
-	color:white;
-}
-button{
-	background:crimson;
-	color:white;
-	border:none;
-	padding:10px;
-	border-radius:20px;
-}
-#toast{
-	width:400px;
-	height:50px;
-	line-height:50px;
-	background:white;
-	color:crimson;
-	border-radius:100px;
-	position:absolute;
-	left:50%;
-	margin-left:-200px;
-	bottom:100px;
-	text-align:center;
-	opacity:0;
-}
-.animado{
-	animation: aparece 10s;
-}
-@keyframes aparece{
-	0%{display:block;opacity:0;}
-	10%{display:block;opacity:1;}
-	90%{display:block;opacity:1;}
-	100%{display:block;opacity:0;}
-}
-
-
-
-
+	font-family: Ubuntu;
+	src: url(Ubuntu-R.ttf);
+  }
+  body {
+	font-family: 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background: linear-gradient(0deg, #009B77 0%, #A7DBD8 100%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  #formlogin {
+	width: 320px;
+	padding: 40px 20px;
+	background-color: #fff;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	text-align: center;
+  }
+  
+  #logo {
+	width: 80px;
+	margin-bottom: 20px;
+  }
+  
+  input {
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	box-sizing: border-box;
+	background-color: #f9f9f9;
+	transition: border-color 0.2s;
+  }
+  
+  input:focus {
+	border-color: #007bff;
+	outline: none;
+  }
+  
+  button {
+	width: 100%;
+	padding: 12px;
+	background: linear-gradient(180deg, #009B77 0%, #A7DBD8 100%);
+	color: white;
+	font-size: 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+  }
+  
+  button:hover {
+	background-color: #0056b3;
+  }
+  
+  button:focus {
+	outline: none;
+  }

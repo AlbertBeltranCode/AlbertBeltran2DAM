@@ -8,11 +8,11 @@ nav ul li{
 }
 main nav {
   overflow-y: auto; /* Independent scrolling for nav if needed */
-  background: crimson;
+  background: #007C64;
   color: white;
 }
 main nav{
-	background:crimson;
+	background:#007C64;
 	color:white;
 	display: flex;
 	flex-direction: column;

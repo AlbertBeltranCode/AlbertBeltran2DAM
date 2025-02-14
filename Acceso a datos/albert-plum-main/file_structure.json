@@ -1,0 +1,25 @@
+[
+    {
+        "name": "jocarsa-tomato",
+        "path": "/var/www/html\\jocarsa-tomato",
+        "type": "directory",
+        "size": 292358,
+        "contents": [
+            {
+                "name": "img",
+                "path": "/var/www/html\\jocarsa-tomato\\img",
+                "type": "directory",
+                "size": 292175,
+                "contents": [
+                    {
+                        "name": "hourly",
+                        "path": "/var/www/html\\jocarsa-tomato\\img\\hourly",
+                        "type": "directory",
+                        "size": 292175,
+                        "contents": []
+                    }
+                ]
+            }
+        ]
+    }
+]

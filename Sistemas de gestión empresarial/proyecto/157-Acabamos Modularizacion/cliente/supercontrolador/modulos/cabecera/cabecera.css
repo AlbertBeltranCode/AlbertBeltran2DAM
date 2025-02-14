@@ -42,10 +42,11 @@ h1 img{
 }
 .titulotabla{
 	background:white;
-	color:crimson;
+	color:#007C64;
 	padding:10px 30px;
 	border-radius:5px;
 	min-width:300px;
 	min-height:40px;
+	margin-right: 800px;
 	
 }

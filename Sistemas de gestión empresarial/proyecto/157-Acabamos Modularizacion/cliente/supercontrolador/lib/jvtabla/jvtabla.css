@@ -4,7 +4,7 @@
 	border-collapse: collapse;
 }
 .jvtabla thead tr{
-	background:crimson;
+	background:#009B77;
 	color:white;
 	
 }
@@ -14,4 +14,3 @@
 .jvtabla tbody tr td{
 	padding:10px;
 }
-
