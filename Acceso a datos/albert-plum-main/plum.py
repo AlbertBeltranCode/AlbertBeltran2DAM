@@ -450,7 +450,7 @@ def create_html_sunburst_chart(data, html_file):
 
 def main():
     # Change this to the folder you want to scan
-    root_dir = "/var/www/html"
+    root_dir = "/xampp/htdocs"
     output_file = "file_structure.json"
     html_file = "file_structure_sunburst.html"
     folders_only = True  # Set to False to include files as well
