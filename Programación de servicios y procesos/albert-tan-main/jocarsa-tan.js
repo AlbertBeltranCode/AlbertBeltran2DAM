@@ -45,23 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return `hsl(${h}, ${s}%, ${l}%)`;
     }
 
-    // Función auxiliar para modificar la luminosidad de un color HSL
-    function modifyHslLightness(hslString, newLightness) {
-        if (newLightness < 0 || newLightness > 100) {
-            throw new Error("El valor de luminosidad debe estar entre 0 y 100.");
-        }
-
-        const match = hslString.match(/^hsl\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%\)$/);
-        if (!match) {
-            throw new Error("Formato HSL inválido. Use el formato 'hsl(x, y%, z%)'.");
-        }
-
-        const h = parseInt(match[1], 10);
-        const s = parseInt(match[2], 10);
-
-        return `hsl(${h}, ${s}%, ${newLightness}%)`;
-    }
-
     // Función auxiliar para interpolar entre dos colores HSL
     function interpolateHsl(hsl1, hsl2, percentage) {
         const match1 = hsl1.match(/^hsl\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%\)$/);
@@ -108,9 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tablas.forEach(function(tabla) {
             const computedStyle = window.getComputedStyle(tabla);
             let color = computedStyle.color;
-            // Se obtiene el color de fondo, pero ahora lo ignoramos para usar siempre los sliders
-            // let bgColor = computedStyle.backgroundColor;
-
             // Si el color no está definido, se asigna un valor por defecto
             if (!color || color === 'rgba(0, 0, 0, 0)' || color === 'transparent') {
                 color = "rgb(255, 0, 0)";
@@ -164,9 +144,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
 
+            // Resaltar solo la celda con el valor máximo global
+            const maxGlobal = Math.max(...valores);
+            celdas.forEach(function(celda) {
+                if (parseFloat(celda.textContent) === maxGlobal) {
+                    celda.style.border = "3px solid red";
+                }
+            });
+
             tabla.style.background = "none";
             tabla.style.color = "inherit";
         });
+    }
+
+    // Función para manejar el clic en las celdas
+    function handleCellClick(event) {
+        const celda = event.target;
+        if (celda.style.border === "3px solid red") {
+            celda.style.border = "";
+        } else {
+            celda.style.border = "3px solid red";
+        }
+    }
+
+    // Función para guardar los valores resaltados en un JSON
+    function saveHighlightedValues() {
+        const tablas = document.querySelectorAll(".jocarsa-tan");
+        const highlightedValues = [];
+
+        tablas.forEach(function(tabla) {
+            const celdas = tabla.querySelectorAll("tbody td");
+            celdas.forEach(function(celda) {
+                if (celda.style.border === "3px solid red") {
+                    highlightedValues.push(parseFloat(celda.textContent));
+                }
+            });
+        });
+
+        const jsonData = JSON.stringify(highlightedValues, null, 2);
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'highlighted_values.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
     // Asignar eventos a los controles
@@ -191,4 +215,108 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error('No se pudieron encontrar uno o más elementos necesarios en el DOM.');
     }
+
+    // Asignar el evento de clic a todas las celdas de la tabla
+    const tablas = document.querySelectorAll(".jocarsa-tan");
+    tablas.forEach(function(tabla) {
+        const celdas = tabla.querySelectorAll("tbody td");
+        celdas.forEach(function(celda) {
+            celda.addEventListener('click', handleCellClick);
+        });
+    });
+
+    // Añadir botón para guardar los valores resaltados
+    const saveButton = document.createElement('button');
+    saveButton.textContent = "Guardar Valores Resaltados";
+    saveButton.addEventListener('click', saveHighlightedValues);
+    document.querySelector('.controls').appendChild(saveButton);
+
+    // Función para aplicar el filtro de valor mínimo y máximo
+    function applyFilter() {
+        const minValueInput = document.getElementById('minValue');
+        const maxValueInput = document.getElementById('maxValue');
+
+        if (!minValueInput || !maxValueInput) {
+            console.error('No se encontraron los elementos de entrada de filtro.');
+            return;
+        }
+
+        const minValue = parseFloat(minValueInput.value);
+        const maxValue = parseFloat(maxValueInput.value);
+
+        const tablas = document.querySelectorAll(".jocarsa-tan");
+        tablas.forEach(function(tabla) {
+            const celdas = tabla.querySelectorAll("tbody td");
+            celdas.forEach(function(celda) {
+                const valor = parseFloat(celda.textContent);
+                if (valor >= minValue && valor <= maxValue) {
+                    celda.style.display = "";
+                } else {
+                    celda.style.display = "none";
+                }
+            });
+        });
+    }
+
+    // Función para reiniciar el filtro
+    function resetFilter() {
+        const tablas = document.querySelectorAll(".jocarsa-tan");
+        tablas.forEach(function(tabla) {
+            const celdas = tabla.querySelectorAll("tbody td");
+            celdas.forEach(function(celda) {
+                celda.style.display = "";
+            });
+        });
+    }
+
+    // Añadir botón para aplicar el filtro
+    const applyFilterButton = document.createElement('button');
+    applyFilterButton.textContent = "Aplicar Filtro";
+    applyFilterButton.addEventListener('click', applyFilter);
+    document.querySelector('.controls').appendChild(applyFilterButton);
+
+    // Añadir botón para reiniciar el filtro
+    const resetFilterButton = document.createElement('button');
+    resetFilterButton.textContent = "Reiniciar Filtro";
+    resetFilterButton.addEventListener('click', resetFilter);
+    document.querySelector('.controls').appendChild(resetFilterButton);
+
+    // Añadir sliders para filtrar por valor mínimo y máximo
+    const minValueLabel = document.createElement('label');
+    minValueLabel.textContent = "Valor Mínimo: ";
+    minValueLabel.htmlFor = "minValue";
+    document.querySelector('.controls').appendChild(minValueLabel);
+
+    const minValueInputElement = document.createElement('input');
+    minValueInputElement.type = "range";
+    minValueInputElement.id = "minValue";
+    minValueInputElement.min = "0";
+    minValueInputElement.max = "500";
+    minValueInputElement.value = "0";
+    document.querySelector('.controls').appendChild(minValueInputElement);
+
+    const minValueValueElement = document.createElement('span');
+    minValueValueElement.id = "minValueValue";
+    minValueValueElement.textContent = "0";
+    document.querySelector('.controls').appendChild(minValueValueElement);
+
+    const maxValueLabel = document.createElement('label');
+    maxValueLabel.textContent = "Valor Máximo: ";
+    maxValueLabel.htmlFor = "maxValue";
+    document.querySelector('.controls').appendChild(maxValueLabel);
+
+    const maxValueInputElement = document.createElement('input');
+    maxValueInputElement.type = "range";
+    maxValueInputElement.id = "maxValue";
+    maxValueInputElement.min = "0";
+    maxValueInputElement.max = "500";
+    maxValueInputElement.value = "500";
+    document.querySelector('.controls').appendChild(maxValueInputElement);
+
+    const maxValueValueElement = document.createElement('span');
+    maxValueValueElement.id = "maxValueValue";
+    maxValueValueElement.textContent = "500";
+    document.querySelector('.controls').appendChild(maxValueValueElement);
+
+    document.querySelector('.controls').appendChild(document.createElement('br'));
 });

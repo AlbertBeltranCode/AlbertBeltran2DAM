@@ -2,6 +2,7 @@
 <html>
     <head>
         <script defer src="jocarsa-tan.js"></script>
+        <link rel="stylesheet" href="estilo.css">
         <style>
             table tbody tr td { text-align: center; padding: 10px; }
             .controls { margin: 20px 0; }
@@ -12,7 +13,7 @@
             $columnas = 8;
             $filas = 16;
         ?>
-        <h1>Una tabla</h1>
+        <h1>Albert Tabla random</h1>
         <div class="controls">
             <label for="startColor">Color Inicial:</label>
             <input type="range" id="startColor" name="startColor" min="0" max="360" value="0">
@@ -23,29 +24,6 @@
             <span id="endColorValue">120</span>
         </div>
         <table class="jocarsa-tan" style="color:rgb(234,0,0);background:rgb(0,255,0);">
-            <thead>
-                <tr>
-                    <?php
-                        for($i = 0; $i < $columnas; $i++){
-                            echo '<th>'.$i.'</th>';
-                        }
-                    ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    for($i = 0; $i < $filas; $i++){
-                        echo '<tr>';
-                        for($j = 0; $j < $columnas; $j++){
-                            echo '<td>'.rand(1,500).'</td>';
-                        }
-                        echo '</tr>';
-                    }
-                ?>
-            </tbody>
-        </table>
-        <h1>Otra tabla</h1>
-        <table>
             <thead>
                 <tr>
                     <?php
