@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Multilingüe - Tienda</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Encabezado y navegación -->
+  <header>
+    <nav class="navbar">
+      <div class="logo" id="navLogo">MiTienda</div>
+      <ul class="nav-links">
+        <li><a href="#" id="navHome">Inicio</a></li>
+        <li><a href="#" id="navStore">Tienda</a></li>
+        <li><a href="#" id="navContact">Contacto</a></li>
+      </ul>
+      <div class="dropdown">
+        <button class="dropbtn">Idioma</button>
+        <div class="dropdown-content">
+          <a href="#" onclick="changeLanguage('es')">Español</a>
+          <a href="#" onclick="changeLanguage('en')">English</a>
+          <a href="#" onclick="changeLanguage('fr')">Français</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sección Hero con video de fondo -->
+    <section class="hero">
+        <div class="video-container">
+        <video autoplay muted loop>
+            <source src="background.mp4" type="video/mp4">
+            Tu navegador no soporta videos.
+        </video>
+        </div>
+        <div class="hero-content">
+        <h1 id="heroTitle">Bienvenido a MiTienda</h1>
+        <p id="heroSubtitle">Encuentra los mejores productos al mejor precio.</p>
+        <button id="heroButton">Comprar Ahora</button>
+        </div>
+    </section>
+
+ <!-- Sección Sobre Nosotros -->
+    <section class="about">
+        <div class="about-container">
+        <div class="about-image">
+            <img src="about_us.jpg" alt="Sobre Nosotros">
+        </div>
+        <div class="about-text">
+            <h2 id="sectionTitle">Sobre Nosotros</h2>
+            <p id="sectionContent">
+            Somos una empresa comprometida con la excelencia y la calidad.
+            </p>
+        </div>
+        </div>
+    </section>
+
+  <!-- Sección Servicios -->
+    <section class="services">
+        <div class="services-container">
+        <div class="services-text">
+            <h2 id="servicesTitle">Servicios</h2>
+            <ul>
+            <li id="service1">Consultoría</li>
+            <li id="service2">Desarrollo Web</li>
+            <li id="service3">Marketing Digital</li>
+            </ul>
+        </div>
+        <div class="services-image">
+            <img src="services.jpg" alt="Nuestros Servicios">
+        </div>
+        </div>
+    </section>
+  
+
+  <!-- Sección Productos Destacados -->
+  <section class="featured-products">
+    <h2 id="featuredProductsTitle">Productos Destacados</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image">
+        <img src="producto1.png" alt="Producto 1">
+        </div>
+        <h3 id="product1Name">Producto 1</h3>
+        <p id="product1Desc">Descripción breve del producto 1.</p>
+        <button id="product1Button">Ver Producto</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+        <img src="producto2.png" alt="Producto 2">
+        </div>
+        <h3 id="product2Name">Producto 2</h3>
+        <p id="product2Desc">Descripción breve del producto 2.</p>
+        <button id="product2Button">Ver Producto</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+        <img src="producto3.png" alt="Producto 3">
+        </div>
+        <h3 id="product3Name">Producto 3</h3>
+        <p id="product3Desc">Descripción breve del producto 3.</p>
+        <button id="product3Button">Ver Producto</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Boletín -->
+  <section class="newsletter">
+    <h2 id="newsletterTitle">Suscríbete a Nuestro Boletín</h2>
+    <p id="newsletterSubtitle">Recibe las últimas noticias y ofertas directamente en tu correo.</p>
+    <form id="newsletterForm">
+      <input type="email" id="newsletterInput" placeholder="Ingresa tu correo">
+      <button type="submit" id="newsletterButton">Suscribirse</button>
+    </form>
+  </section>
+
+  <!-- Sección Testimonios -->
+  <section class="testimonials">
+    <h2 id="testimonialTitle">Testimonios</h2>
+    <div class="testimonial">
+      <p id="testimonialContent">"Excelente servicio y productos de alta calidad. Recomiendo MiTienda."</p>
+      <span id="testimonialAuthor">- Juan Pérez</span>
+    </div>
+  </section>
+
+  <!-- Pie de página -->
+  <footer>
+    <p id="footerContent">Derechos reservados - Albert Beltran © 2025</p>
+  </footer>
+
+  <!-- Scripts de traducción -->
+  <script src="translations.json"></script>
+  <script>
+    fetch('translations.json')
+      .then(response => response.json())
+      .then(data => {
+        window.translations = data;
+        changeLanguage('es'); // Idioma por defecto
+      });
+
+    function changeLanguage(lang) {
+      document.getElementById('navLogo').innerText = translations[lang].navLogo;
+      document.getElementById('navHome').innerText = translations[lang].navHome;
+      document.getElementById('navStore').innerText = translations[lang].navStore;
+      document.getElementById('navContact').innerText = translations[lang].navContact;
+      document.getElementById('heroTitle').innerText = translations[lang].heroTitle;
+      document.getElementById('heroSubtitle').innerText = translations[lang].heroSubtitle;
+      document.getElementById('heroButton').innerText = translations[lang].heroButton;
+      document.getElementById('sectionTitle').innerText = translations[lang].sectionTitle;
+      document.getElementById('sectionContent').innerText = translations[lang].sectionContent;
+      document.getElementById('servicesTitle').innerText = translations[lang].servicesTitle;
+      document.getElementById('service1').innerText = translations[lang].service1;
+      document.getElementById('service2').innerText = translations[lang].service2;
+      document.getElementById('service3').innerText = translations[lang].service3;
+      document.getElementById('featuredProductsTitle').innerText = translations[lang].featuredProductsTitle;
+      document.getElementById('product1Name').innerText = translations[lang].product1Name;
+      document.getElementById('product1Desc').innerText = translations[lang].product1Desc;
+      document.getElementById('product1Button').innerText = translations[lang].product1Button;
+      document.getElementById('product2Name').innerText = translations[lang].product2Name;
+      document.getElementById('product2Desc').innerText = translations[lang].product2Desc;
+      document.getElementById('product2Button').innerText = translations[lang].product2Button;
+      document.getElementById('product3Name').innerText = translations[lang].product3Name;
+      document.getElementById('product3Desc').innerText = translations[lang].product3Desc;
+      document.getElementById('product3Button').innerText = translations[lang].product3Button;
+      document.getElementById('newsletterTitle').innerText = translations[lang].newsletterTitle;
+      document.getElementById('newsletterSubtitle').innerText = translations[lang].newsletterSubtitle;
+      document.getElementById('newsletterInput').placeholder = translations[lang].newsletterPlaceholder;
+      document.getElementById('newsletterButton').innerText = translations[lang].newsletterButton;
+      document.getElementById('testimonialTitle').innerText = translations[lang].testimonialTitle;
+      document.getElementById('testimonialContent').innerText = translations[lang].testimonialContent;
+      document.getElementById('testimonialAuthor').innerText = translations[lang].testimonialAuthor;
+      document.getElementById('footerContent').innerText = translations[lang].footer;
+    }
+  </script>
+</body>
+</html>

@@ -3,3 +3,6 @@
 ('127.0.0.1', 51284): Este mensaje es magico
 ('127.0.0.1', 51304): Holiwi uwu
 ('127.0.0.1', 61751): Hola youtube!
+('127.0.0.1', 50623): Buenas tardes
+('127.0.0.1', 50761): hola
+('127.0.0.1', 50827): hola

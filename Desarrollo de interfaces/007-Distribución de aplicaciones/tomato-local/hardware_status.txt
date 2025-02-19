@@ -1,0 +1,4 @@
+cpu_temp: N/A
+disk_health: Buen estado
+battery: N/A
+system_status: Estable

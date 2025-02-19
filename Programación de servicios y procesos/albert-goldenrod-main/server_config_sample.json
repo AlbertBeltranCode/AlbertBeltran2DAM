@@ -1,5 +1,6 @@
 {
     "host": "0.0.0.0",
     "port": 3000,
-    "message_file": "messages.txt"
+    "message_file": "messages.txt",
+    "log_file": "connections.log"
 }

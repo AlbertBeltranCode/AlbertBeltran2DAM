@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Examples</title>
+    <script src="jocarsa_mistyrose.js"></script>
+    <link rel="stylesheet" href="jocarsa_mistyrose.css">
+</head>
+<body>
+    <div class="chart-container"></div>
+    <div class="chart-container"></div>
+    <div class="chart-container"></div>
+    <div class="chart-container"></div>
+
+    <script>
+        // JSON data
+        const data = [
+            { label: "Category A", value: 30 },
+            { label: "Category B", value: 50 },
+            { label: "Category C", value: 20 }
+        ];
+
+        // Create a new Chart instance for each container
+        document.querySelectorAll(".chart-container").forEach((container, index) => {
+            const chart = new jocarsaMistyrose.Chart(".chart-container", data);
+            if (index === 0) {
+                chart.createPieChart(container); // First container gets a pie chart
+            } else if (index === 1) {
+                chart.createBarChart(container); // Second container gets a bar chart
+            } else if (index === 2) {
+                chart.createDonutChart(container); // Third container gets a donut chart
+            } else if (index === 3) {
+                chart.createLineChart(container); // Fourth container gets a line chart
+            }
+        });
+    </script>
+</body>
+</html>

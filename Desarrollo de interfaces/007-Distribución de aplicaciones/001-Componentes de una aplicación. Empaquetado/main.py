@@ -10,17 +10,15 @@ class PhotoRenamerApp(tk.Tk):
         super().__init__()
         
         self.title("Photo Renamer")
-        self.geometry("400x350")
+        self.geometry("500x450")
+        self.configure(bg="#f0f0f0")
         
         # -- Logo --
-        # Replace 'logo.png' with the path to your logo file.
-        # If you don't have a logo, you can comment this out or remove it.
         try:
-            self.logo_image = tk.PhotoImage(file="logo.png")
-            self.logo_label = tk.Label(self, image=self.logo_image)
+            self.logo_image = tk.PhotoImage(file="logo2.png")
+            self.logo_label = tk.Label(self, image=self.logo_image, bg="#f0f0f0")
             self.logo_label.pack(pady=10)
         except Exception:
-            # If the image file isn't found, we won't display the logo
             pass
         
         # -- Folder path variable --
@@ -30,20 +28,31 @@ class PhotoRenamerApp(tk.Tk):
         self.select_folder_button = ttk.Button(
             self, 
             text="Select Target Folder", 
-            command=self.select_folder
+            command=self.select_folder,
+            style="TButton"
         )
-        self.select_folder_button.pack(pady=5)
+        self.select_folder_button.pack(pady=10)
+        
+        # -- Format Selection --
+        self.format_label = tk.Label(self, text="Select Filename Format:", bg="#f0f0f0")
+        self.format_label.pack(pady=(10, 0))
+        
+        self.format_var = tk.StringVar(value="YYYYMMDD_HHMMSS")
+        self.format_options = ["YYYYMMDD_HHMMSS", "YYYY-MM-DD_HH-MM-SS", "DDMMYYYY_HHMMSS"]
+        self.format_menu = ttk.Combobox(self, textvariable=self.format_var, values=self.format_options, state="readonly")
+        self.format_menu.pack(pady=5)
         
         # -- Start Operation Button --
         self.start_button = ttk.Button(
             self, 
             text="Start Renaming", 
-            command=self.start_renaming
+            command=self.start_renaming,
+            style="TButton"
         )
-        self.start_button.pack(pady=5)
+        self.start_button.pack(pady=10)
         
         # -- Progress Label --
-        self.progress_label = tk.Label(self, text="Progress:")
+        self.progress_label = tk.Label(self, text="Progress:", bg="#f0f0f0")
         self.progress_label.pack(pady=(20, 0))
         
         # -- Progress Bar --
@@ -51,19 +60,28 @@ class PhotoRenamerApp(tk.Tk):
         self.progress_bar = ttk.Progressbar(
             self, 
             orient="horizontal", 
-            length=300, 
+            length=400, 
             mode="determinate", 
             variable=self.progress_var,
             maximum=100
         )
         self.progress_bar.pack()
         
+        # -- Status Label --
+        self.status_label = tk.Label(self, text="", bg="#f0f0f0")
+        self.status_label.pack(pady=10)
+        
+        # -- Style Configuration --
+        self.style = ttk.Style()
+        self.style.configure("TButton", font=("Arial", 10), padding=5)
+        self.style.configure("TCombobox", font=("Arial", 10), padding=5)
+        
     def select_folder(self):
         """Open a dialog to select the target folder."""
         selected_folder = filedialog.askdirectory()
         if selected_folder:
             self.folder_path.set(selected_folder)
-            messagebox.showinfo("Folder Selected", f"Selected folder:\n{selected_folder}")
+            self.status_label.config(text=f"Selected folder: {selected_folder}")
         
     def start_renaming(self):
         """Start the photo renaming process."""
@@ -108,12 +126,13 @@ class PhotoRenamerApp(tk.Tk):
             self.progress_var.set(progress_percent)
             self.update_idletasks()
         
+        self.status_label.config(text="Renaming operation completed.")
         messagebox.showinfo("Done", "Renaming operation completed.")
         
     def get_new_filename(self, file_path, original_filename):
         """
         Tries to extract the EXIF 'DateTimeOriginal' from the image.
-        If found, returns a new name formatted as YYYYMMDD_HHMMSS + extension.
+        If found, returns a new name formatted as per the selected format.
         Otherwise, returns the original filename (meaning, no rename).
         """
         try:
@@ -138,8 +157,17 @@ class PhotoRenamerApp(tk.Tk):
             
             # Parse date string, typically in the format "YYYY:MM:DD HH:MM:SS"
             date_time_obj = datetime.strptime(date_str, "%Y:%m:%d %H:%M:%S")
-            # Create a new filename with this format: YYYYMMDD_HHMMSS + ext
-            new_basename = date_time_obj.strftime("%Y%m%d_%H%M%S")
+            
+            # Get the selected format
+            selected_format = self.format_var.get()
+            if selected_format == "YYYYMMDD_HHMMSS":
+                new_basename = date_time_obj.strftime("%Y%m%d_%H%M%S")
+            elif selected_format == "YYYY-MM-DD_HH-MM-SS":
+                new_basename = date_time_obj.strftime("%Y-%m-%d_%H-%M-%S")
+            elif selected_format == "DDMMYYYY_HHMMSS":
+                new_basename = date_time_obj.strftime("%d%m%Y_%H%M%S")
+            else:
+                new_basename = date_time_obj.strftime("%Y%m%d_%H%M%S")
             
             # Preserve original extension
             _, ext = os.path.splitext(original_filename)

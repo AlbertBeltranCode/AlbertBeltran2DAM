@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chat de Asistencia por Voz</title>
+  <style>
+    body { background: lightgrey; font-family: sans-serif; }
+    main { width: 600px; background: white; padding: 20px; margin: auto; text-align: center; }
+    #chat { border: 1px solid lightgrey; margin-bottom: 20px; padding: 10px; min-height: 400px; max-height: 400px; overflow-y: scroll; text-align: left; }
+    #pensando { margin-bottom: 20px; }
+    button { padding: 10px 20px; margin: 5px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Chat de Asistencia por Voz</h1>
+  <div id="chat"></div>
+  <div id="pensando"></div>
+  <button onclick="startDictation()">🎤 Hablar</button>
+</main>
+<script>
+  let chatDiv = document.getElementById("chat");
+  let pensando = document.getElementById("pensando");
+  let respuestasIA = {};
+  let ejemplosIA = {};
+
+  // Cargar el JSON de respuestas generales
+  fetch("respuestas_de_ia.json")
+    .then(response => response.json())
+    .then(data => { respuestasIA = data; })
+    .catch(error => { console.error("Error al cargar respuestas_de_ia.json:", error); });
+
+  // Cargar el JSON de ejemplos
+  fetch("ejemplos_de_ia.json")
+    .then(response => response.json())
+    .then(data => { ejemplosIA = data; })
+    .catch(error => { console.error("Error al cargar ejemplos_de_ia.json:", error); });
+
+  // Lista de palabras clave para temas de programación
+  const temas = [
+    "python", "javascript", "java", "c++", "c#", "ruby", "php", "sql",
+    "html", "css", "debug", "error", "variable", "funcion", "bucle",
+    "while", "for", "array", "lista", "diccionario", "objeto", "clase",
+    "herencia", "polimorfismo", "encapsulacion", "oop", "programacion",
+    "algoritmo", "compilar", "compilador", "ejecucion", "runtime",
+    "optimizacion", "ide", "framework", "react", "angular", "vue", "node",
+    "express", "django", "flask", "spring", "laravel", "asp.net", "api",
+    "rest", "graphql", "json", "xml", "async", "await", "promesa",
+    "callback", "closure", "lambda", "anonima", "stacktrace", "sqlinjection",
+    "seguridad", "encriptacion", "hash", "scripting", "database",
+    "postgresql", "mysql", "mongodb", "nosql", "version", "git", "github",
+    "bitbucket", "devops", "docker", "kubernetes", "virtualizacion", "linux",
+    "windows", "mac", "sistemaoperativo", "redes", "internet", "socket",
+    "websocket", "servidor", "cliente", "frontend", "backend", "fullstack",
+    "programar", "codigo", "debuggear", "testing", "unitario", "integracion",
+    "ci", "cd", "machine", "learning","creador","guerra","jv"
+  ];
+
+  // Función para analizar la pregunta
+  function analizarPregunta(pregunta) {
+    const preguntaMin = pregunta.toLowerCase();
+    // Detecta si se solicita un ejemplo (por ejemplo: "dame un ejemplo de for")
+    const solicitaEjemplo = preguntaMin.includes("ejemplo");
+
+    // Detecta qué temas aparecen en la pregunta
+    let temasEncontrados = temas.filter(tema => preguntaMin.includes(tema));
+
+    // Si se pide un ejemplo y se encontró al menos un tema, buscamos en el JSON de ejemplos.
+    if (solicitaEjemplo && temasEncontrados.length > 0) {
+      // Puedes aplicar una lógica para elegir el tema adecuado. En este ejemplo, usamos el primero.
+      let keyEjemplo = "ejemplo_" + temasEncontrados[0];
+      if (ejemplosIA[keyEjemplo]) {
+        return ejemplosIA[keyEjemplo];
+      } else {
+        return "No tengo un ejemplo para " + temasEncontrados[0];
+      }
+    }
+    // Si no se solicita un ejemplo pero se encontró un tema, usamos la respuesta general.
+    if (temasEncontrados.length > 0) {
+      let tema = temasEncontrados[0];
+      if (respuestasIA[tema]) {
+        return respuestasIA[tema];
+      } else {
+        return respuestasIA["default"] || "Lo siento, no entendí tu pregunta.";
+      }
+    }
+    // Si no se detecta ningún tema, se retorna la respuesta por defecto.
+    return respuestasIA["default"] || "Lo siento, no entendí tu pregunta.";
+  }
+
+  // Función para agregar un mensaje al chat
+  function agregarMensaje(remitente, mensaje) {
+    let p = document.createElement("p");
+    p.innerHTML = "<strong>" + remitente + ":</strong> " + mensaje;
+    chatDiv.appendChild(p);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+  }
+
+  // Función para iniciar el reconocimiento de voz
+  function startDictation() {
+    if ('webkitSpeechRecognition' in window) {
+      pensando.innerHTML = "<img src='loading.gif' alt='Escuchando...'>";
+      let recognition = new webkitSpeechRecognition();
+      recognition.lang = 'es-ES';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = function(event) {
+        let pregunta = event.results[0][0].transcript;
+        pensando.innerHTML = "";
+        agregarMensaje("Tú", pregunta);
+
+        let respuesta = analizarPregunta(pregunta);
+        agregarMensaje("Asistente", respuesta);
+
+        // Sintetiza la respuesta en voz
+        let synth = window.speechSynthesis;
+        synth.cancel();
+        let speech = new SpeechSynthesisUtterance(respuesta);
+        speech.lang = "es-ES";
+        speech.rate = 1;
+        speech.pitch = 1;
+        speech.volume = 1;
+        synth.speak(speech);
+      };
+
+      recognition.onerror = function(event) {
+        pensando.innerHTML = "";
+        console.error("Error de reconocimiento:", event.error);
+      };
+
+      recognition.start();
+    } else {
+      alert("El reconocimiento de voz no es compatible con este navegador.");
+    }
+  }
+</script>
+</body>
+</html>
