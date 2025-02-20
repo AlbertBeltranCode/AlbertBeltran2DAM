@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Paint Avanzado</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<!-- Barra de herramientas -->
+<div id="toolbar">
+  <div class="tool-group">
+    <label>Modo:</label>
+    <button onclick="setMode('free')">Dibujo Libre</button>
+    <button onclick="setMode('circle')">Círculo</button>
+    <button onclick="setMode('rectangle')">Rectángulo</button>
+  </div>
+  <div class="tool-group">
+    <label>Color:</label>
+    <input type="color" id="colorPicker" value="#000000" onchange="updateColor(this.value)">
+    <button onclick="toggleEraser()">Borrador</button>
+  </div>
+  <div class="tool-group">
+    <label>Grosor:</label>
+    <input type="range" id="brushSize" min="1" max="50" value="4" onchange="updateBrushSize(this.value)">
+  </div>
+  <div class="tool-group">
+    <button onclick="undo()">Deshacer</button>
+    <button onclick="redo()">Rehacer</button>
+  </div>
+  <div class="tool-group">
+    <label>Fondo:</label>
+    <input type="color" id="bgColorPicker" value="#ffffff">
+    <button onclick="setBackground()">Establecer Fondo</button>
+  </div>
+  <div class="tool-group">
+    <label>Zoom:</label>
+    <input type="range" id="zoomRange" min="50" max="200" value="100" onchange="updateZoom(this.value)">
+  </div>
+</div>
+
+<!-- Contenedor de lienzos (capas) -->
+<div id="canvasContainer">
+  <!-- Capa de fondo -->
+  <canvas id="backgroundCanvas" width="800" height="600"></canvas>
+  <!-- Capa de dibujo -->
+  <canvas id="drawingCanvas" width="800" height="600"></canvas>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Calculadora de Factura Avanzada</title>
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            text-align: center;
+            margin: 20px;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #0ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #0ff;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            text-shadow: 0 0 5px #0ff;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #222;
+            color: #0ff;
+            box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 10px #0ff;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0ff;
+            border: none;
+            color: #000;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background: #00aaff;
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        .saved-calculations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .saved-calculations li {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        .tax-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: center;
+        }
+        .tax-row select {
+            flex: 1;
+        }
+        .tax-row input {
+            flex: 2;
+        }
+        .remove-tax {
+            background: #ff4444;
+            width: auto;
+            padding: 5px 10px;
+        }
+        .currency-section {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .api-key-container {
+            margin-top: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 480px) {
+            .tax-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="perreteespacial.jpg" alt="Calculadra">
+    <h1>Calculadora de Factura Avanzada</h1>
+
+    <!-- Currency Section -->
+    <div class="currency-section">
+        <label for="currency">Moneda:</label>
+        <select id="currency" name="currency">
+            <option value="EUR">Euro (€)</option>
+            <option value="USD">Dólar ($)</option>
+            <option value="GBP">Libra (£)</option>
+            <option value="JPY">Yen (¥)</option>
+        </select>
+
+        <div class="api-key-container">
+            <label for="apiKey">Clave API de Divisas:</label>
+            <input type="password" id="apiKey" placeholder="Ingresa tu clave API">
+            <button onclick="saveAPIKey()">Guardar Clave</button>
+        </div>
+    </div>
+
+    <form id="calculatorForm">
+        <label for="tituloCalculo">Título del Cálculo:</label>
+        <input type="text" id="tituloCalculo" name="tituloCalculo" placeholder="Introduce un título" required>
+
+        <label for="baseImponible">Base Imponible:</label>
+        <input type="number" id="baseImponible" name="baseImponible" min="0" step="0.01" required>
+
+        <label for="irpf">Tramo de IRPF:</label>
+        <select id="irpf" name="irpf" required>
+            <option value="" disabled selected>Selecciona IRPF</option>
+            <option value="0.15">15%</option>
+            <option value="0.19">19%</option>
+            <option value="0.24">24%</option>
+            <option value="0.30">30%</option>
+            <option value="0.35">35%</option>
+            <option value="0.37">37%</option>
+            <option value="0.40">40%</option>
+            <option value="0.45">45%</option>
+        </select>
+
+        <label for="iva">Tramo de IVA:</label>
+        <select id="iva" name="iva" required>
+            <option value="" disabled selected>Selecciona IVA</option>
+            <option value="0.04">4%</option>
+            <option value="0.10">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.18">18%</option>
+            <option value="0.21">21%</option>
+        </select>
+
+        <!-- Additional Taxes -->
+        <div id="additionalTaxes">
+            <h3>Impuestos Adicionales</h3>
+            <!-- The "+ Añadir Impuesto" button has been removed -->
+            <div class="tax-row hidden" id="taxTemplate">
+                <select class="tax-type">
+                    <option value="percentage">%</option>
+                    <option value="fixed">Fijo</option>
+                </select>
+                <input type="text" class="tax-name" placeholder="Nombre del impuesto">
+                <input type="number" class="tax-value" placeholder="Valor" step="0.01">
+                <button type="button" class="remove-tax">×</button>
+            </div>
+        </div>
+
+        <button type="submit">Calcular</button>
+        <button type="button" id="saveCalculationBtn">Guardar Cálculo</button>
+    </form>
+
+    <div class="result" id="result" style="display:none;">
+        <h2>Resultados:</h2>
+        <p id="totalIVA"></p>
+        <p id="totalIRPF"></p>
+        <div id="additionalTaxesResult"></div>
+        <p id="totalFactura"></p>
+        <p id="ordenAplicacion"></p>
+    </div>
+
+    <div class="saved-calculations">
+        <h2>Cálculos Guardados</h2>
+        <ul id="calculationsList"></ul>
+    </div>
+</div>
+
+<script>
+    // Currency Conversion
+    let exchangeRates = {};
+    const CURRENCY_API_URL = 'https://v6.exchangerate-api.com/v6/';
+
+    async function fetchExchangeRates() {
+        const apiKey = localStorage.getItem('currencyAPIKey');
+        const currency = document.getElementById('currency').value;
+
+        if (!apiKey) {
+            alert('Por favor, ingresa una clave API válida');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${CURRENCY_API_URL}${apiKey}/latest/EUR`);
+            const data = await response.json();
+            if(data.result === 'success') {
+                exchangeRates = data.conversion_rates;
+            } else {
+                alert('Error al obtener tasas de cambio: ' + data['error-type']);
+            }
+        } catch (error) {
+            console.error('Error fetching rates:', error);
+            alert('Error al conectar con el servicio de divisas');
+        }
+    }
+
+    function saveAPIKey() {
+        const apiKey = document.getElementById('apiKey').value;
+        localStorage.setItem('currencyAPIKey', apiKey);
+        fetchExchangeRates();
+    }
+
+    // Note: The addTaxField function has been removed since manual adding is no longer needed.
+
+    function calculateAdditionalTaxes(base) {
+        const taxes = [];
+        document.querySelectorAll('.tax-row:not(#taxTemplate)').forEach(row => {
+            const type = row.querySelector('.tax-type').value;
+            const name = row.querySelector('.tax-name').value || 'Impuesto adicional';
+            const value = parseFloat(row.querySelector('.tax-value').value) || 0;
+
+            const amount = type === 'percentage' ? base * (value / 100) : value;
+            taxes.push({ name, amount, type, value });
+        });
+        return taxes;
+    }
+
+    // Enhanced Calculation
+    async function calculate() {
+        const base = parseFloat(document.getElementById('baseImponible').value);
+        const irpf = parseFloat(document.getElementById('irpf').value);
+        const iva = parseFloat(document.getElementById('iva').value);
+        const currency = document.getElementById('currency').value;
+
+        await fetchExchangeRates();
+        const rate = exchangeRates[currency] || 1;
+        const convertedBase = base / rate;
+
+        const totalIVA = convertedBase * iva;
+        const totalIRPF = convertedBase * irpf;
+        const additionalTaxes = calculateAdditionalTaxes(convertedBase);
+        const totalAdditional = additionalTaxes.reduce((sum, tax) => sum + tax.amount, 0);
+        const total = convertedBase + totalIVA - totalIRPF + totalAdditional;
+
+        return {
+            base: convertedBase,
+            iva: totalIVA,
+            irpf: totalIRPF,
+            additionalTaxes,
+            total,
+            currency,
+            rate
+        };
+    }
+
+    // Enhanced Results Display
+    function showResults(result) {
+        const formatter = new Intl.NumberFormat('es-ES', {
+            style: 'currency',
+            currency: result.currency,
+            minimumFractionDigits: 2
+        });
+
+        document.getElementById('totalIVA').innerHTML = `IVA: ${formatter.format(result.iva)}`;
+        document.getElementById('totalIRPF').innerHTML = `IRPF: ${formatter.format(result.irpf)}`;
+
+        let taxesHTML = '';
+        result.additionalTaxes.forEach(tax => {
+            taxesHTML += `
+                <div class="tax-result">
+                    ${tax.name}: ${formatter.format(tax.amount)}
+                    <small>(${tax.type === 'percentage' ? tax.value + '%' : formatter.format(tax.value)})</small>
+                </div>
+            `;
+        });
+
+        document.getElementById('additionalTaxesResult').innerHTML = taxesHTML;
+        document.getElementById('totalFactura').innerHTML = `
+            Total Factura: <strong>${formatter.format(result.total)}</strong>
+            <br><small>Tasa de cambio: 1 EUR = ${result.rate.toFixed(4)} ${result.currency}</small>
+        `;
+
+        document.getElementById('result').style.display = 'block';
+    }
+
+    // Modified Event Listeners
+    document.getElementById('calculatorForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const result = await calculate();
+        showResults(result);
+    });
+
+    document.getElementById('currency').addEventListener('change', fetchExchangeRates);
+
+    // Save/Load System with Currency Support
+    function saveCalculation() {
+        const title = document.getElementById('tituloCalculo').value.trim();
+        if (!title) {
+            alert('Ingresa un título para el cálculo');
+            return;
+        }
+
+        const calculation = {
+            title,
+            base: parseFloat(document.getElementById('baseImponible').value),
+            irpf: document.getElementById('irpf').value,
+            iva: document.getElementById('iva').value,
+            currency: document.getElementById('currency').value,
+            exchangeRate: exchangeRates[document.getElementById('currency').value],
+            additionalTaxes: Array.from(document.querySelectorAll('.tax-row:not(#taxTemplate)')).map(row => ({
+                type: row.querySelector('.tax-type').value,
+                name: row.querySelector('.tax-name').value,
+                value: parseFloat(row.querySelector('.tax-value').value)
+            })),
+            date: new Date().toISOString()
+        };
+
+        let saved = JSON.parse(localStorage.getItem('calculations')) || [];
+        saved.push(calculation);
+        localStorage.setItem('calculations', JSON.stringify(saved));
+        displaySavedCalculations();
+        alert('Cálculo guardado!');
+    }
+
+    function displaySavedCalculations() {
+        const list = document.getElementById('calculationsList');
+        list.innerHTML = '';
+
+        const saved = JSON.parse(localStorage.getItem('calculations')) || [];
+        saved.forEach((calc, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${calc.title}
+                <small>(${new Date(calc.date).toLocaleDateString()})</small>
+            `;
+            li.onclick = () => loadCalculation(index);
+            list.appendChild(li);
+        });
+    }
+
+    function loadCalculation(index) {
+        const saved = JSON.parse(localStorage.getItem('calculations')) || [];
+        const calc = saved[index];
+
+        document.getElementById('tituloCalculo').value = calc.title;
+        document.getElementById('baseImponible').value = calc.base;
+        document.getElementById('irpf').value = calc.irpf;
+        document.getElementById('iva').value = calc.iva;
+        document.getElementById('currency').value = calc.currency;
+
+        // Clear existing tax fields
+        document.querySelectorAll('.tax-row:not(#taxTemplate)').forEach(row => row.remove());
+
+        // Add saved tax fields by cloning the template directly
+        calc.additionalTaxes.forEach(tax => {
+            const template = document.getElementById('taxTemplate');
+            const newTax = template.cloneNode(true);
+            newTax.classList.remove('hidden');
+            newTax.querySelector('.remove-tax').addEventListener('click', () => newTax.remove());
+            document.getElementById('additionalTaxes').appendChild(newTax);
+            newTax.querySelector('.tax-type').value = tax.type;
+            newTax.querySelector('.tax-name').value = tax.name;
+            newTax.querySelector('.tax-value').value = tax.value;
+        });
+
+        calculate().then(showResults);
+    }
+
+    // Initialization
+    window.onload = () => {
+        const savedKey = localStorage.getItem('currencyAPIKey');
+        if (savedKey) {
+            document.getElementById('apiKey').value = savedKey;
+            fetchExchangeRates();
+        }
+        displaySavedCalculations();
+    };
+
+    // Attach event listener for saving the calculation (works with Android localStorage)
+    document.getElementById('saveCalculationBtn').addEventListener('click', saveCalculation);
+</script>
+</body>
+</html>

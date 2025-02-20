@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Aseguramos que la barra de herramientas se mantenga encima */
+#toolbar {
+  width: 90%;
+  margin: 10px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: relative;
+  z-index: 1000;
+}
+
+.tool-group {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.tool-group label {
+  margin-right: 5px;
+}
+
+button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+input[type="range"] {
+  margin: 0 5px;
+}
+
+#canvasContainer {
+  position: relative;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  /* Para que el escalado se origine desde la parte superior izquierda y no afecte la posición de la barra */
+  transform-origin: top left;
+}
+
+canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

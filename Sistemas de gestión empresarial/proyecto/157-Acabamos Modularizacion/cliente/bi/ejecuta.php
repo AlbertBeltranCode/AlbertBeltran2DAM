@@ -98,6 +98,25 @@ if ($result && $result->num_rows > 0) {
     echo "</form>";
 }
 
+if ($result && $result->num_rows > 0) {
+    // Encriptamos la consulta SQL para luego re-ejecutarla en downloadCSV.php
+    $encodedSQL = base64_encode($sql);
+    echo "<form method='post' action='downloadCSV.php'>";
+    echo "<input type='hidden' name='sql' value='" . $encodedSQL . "'>";
+    echo "<button type='submit'>Download as CSV</button>";
+    echo "</form>";
+}
+
+if ($result && $result->num_rows > 0) {
+    // Encriptamos la consulta SQL para luego re-ejecutarla en downloadPDF.php
+    $encodedSQL = base64_encode($sql);
+// NUEVO: Botón para descargar como PDF
+echo "<form method='post' action='downloadPDF.php'>";
+echo "<input type='hidden' name='sql' value='" . $encodedSQL . "'>";
+echo "<button type='submit'>Download as PDF</button>";
+echo "</form>";
+}
+
 // Close the connection
 $conn->close();
 ?>

@@ -1,0 +1,59 @@
+GESTION EMPRESARIAL
+crimson
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Sistemas de gestión empresarial\proyecto\157-Acabamos Modularizacion
+Spider
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Sistemas de gestión empresarial\spider-main
+
+ACCESO A DATOS
+Conectar mongodb en crimson
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Sistemas de gestión empresarial\proyecto\157-Acabamos Modularizacion
+Miniaplicación de gestión empresarial en XML
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Acceso a datos\005-Bases de datos documentales\004-Creación y borrado de colecciones\008-panel de control
+Chocolate
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Desarrollo de interfaces\006-Documentación de aplicaciones\albert-chocolate-main
+Plum
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Acceso a datos\albert-plum-main
+Cyan
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Acceso a datos\albert-cyan-main
+Floralwhite
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Programación de servicios y procesos\albert-floralwhite-main
+
+PROCESOS Y SERVICIOS
+API EN CRIMSON
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Sistemas de gestión empresarial\proyecto\157-Acabamos Modularizacion
+Tomato
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Desarrollo de interfaces\007-Distribución de aplicaciones\tomato-local
+Ivory
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Programación de servicios y procesos\albert-ivory-main
+GoldenRod
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Programación de servicios y procesos\albert-goldenrod-main
+Tan
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Programación de servicios y procesos\albert-tan-main
+Greenyellow
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Programación de servicios y procesos\albert-greenyellow-main
+
+Desarrollo de interfaces
+JVTABLA
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Desarrollo de interfaces\005-Creación de informes\002-Herramientas gráficas integradas en el IDE y externas al mismo\016-Version Propia
+Crimson modal
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Sistemas de gestión empresarial\proyecto\157-Acabamos Modularizacion
+Bussines analytics
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Sistemas de gestión empresarial\proyecto\157-Acabamos Modularizacion
+Instalador de python
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Desarrollo de interfaces\007-Distribución de aplicaciones\001-Componentes de una aplicación. Empaquetado
+Misty Rose
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Desarrollo de interfaces\007-Distribución de aplicaciones\albert-mistyrose-main
+Magenta
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Desarrollo de interfaces\007-Distribución de aplicaciones\magenta
+
+Programación Multimedia
+Multiidioma propio
+C:\xampp\htdocs\DAM2\AlbertBeltran2DAM\Programación multimedia y dispositivos móviles\multiidioma
+Crimson cars
+C:\Users\alber\AndroidStudioProjects\CrimsonCars
+Calculadra
+C:\Users\alber\AndroidStudioProjects\Calculadra
+Dibujar en canvas
+C:\Users\alber\AndroidStudioProjects\Dibujo2
+Forestgreen
+C:\Users\alber\AndroidStudioProjects\ForestGreen

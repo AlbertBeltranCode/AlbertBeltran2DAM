@@ -1,0 +1,40 @@
+GESTION EMPRESARIAL: CRIMSON - SPIDER
+En crimson:
+- Implementación de perfiles y departamentos en CRIMSON
+- Creación de un sistema de formularios con intermediario JSON
+- Creación de un sistema de BI
+- Refactorización del SSGG por módulos
+- Integración de módulos y aplicaciones en CRIMSON cuidando las entradas y las salidas (crear una interfaz consistente)
+- Mis cambios propios también.
+
+ACCESO A DATOS: Chocolate - Plum - Cyan - Floralwhite 
+- Conectar mongodb en crimson
+- Miniaplicación de gestión empresarial en XML - Carpeta 5 - Carpeta 4 (Añadir en la ruta de google = index.html?f=clientes | index.html?f=facturas | panel.php )
+- Generador documentación hecho en Python. Crea Markdown - Chocolate
+- Proyecto Jocarsa-plum para conocer lo que ocupa una carpeta - Plum
+- Creación de un minimotor de bases de datos en C++ - JSON - cyan
+- Creación de grafica samkey - floralwhite
+
+PROCESOS Y SERVICIOS: TOMATO - IVORY - GOLDENROD - TAN 
+- Api en crimson
+- Operaciones de monitorización sobre el servidor (CPU, ancho de banda, bajada, subida, etc, RAM, disco)- Tomato (Funcion de descargar imagen al clickar) Funcion que muestra la salud del dispositivo y informe cada 24 horas.
+- BLOQUEO DE IPS LEYENDO DE UN JSON Y LO AÑADE A UN LOG - IVORY
+- Generación de un servicio en red tipo Git (Creamos un log de registro de control del servidor y del usuario) - GOLDENROD
+- Desarrollo de librería de mapas de calor - generación de informes - TAN
+- Greenyellow - Proyecto de texto predictivo en base a un documento txt en este caso el quijote (Cliente 5, consumir 5, predictivo 2)
+
+DESARROLLO DE INTERFACES: JVTABLA - CRIMSON,MODAL - BUSSINES ANALYTICS DENTRO DE CRIMSON - Instalador de python - Tomato - Chocolate - Misty Rose - Magenta
+- JV TABLA - Carpeta 5 - Carpeta 2 - 016-Propio. (Le añadimos un buscado y exportación a csv de los parámetros que se muestran)
+- Crimson modal - Formulario de inserción según la tabla en crimson.
+- Bussines analitcs en Crimson - Le hemos añadido la opción de exportar a csv
+- Instalador de python
+- Misty Rose - Generador de graficas , yo le añadi 2 nuevas.
+- Magenta - Mi asistente de voz que contesta en base a varios archivos json.
+
+PROGRAMACION MULTIMEDIA: MULTIIDOMA - CRIMSON CARS - DIBUJAR EN CANVAS - FORESTGREEN - CALCULADRA
+- MULTIIDOMA - Pagina web de empresa programada desde cero donde puedes cambiar el idioma de la pagina entre español, ingles y francés.
+(ANDROID STUDIO)
+- CRIMSON CARS - Aplicación móvil de una tienda de coches con buscado y filtro de rango de precios
+- DIBUJAR EN CANVAS - Aplicación móvil desde cero donde podemos dibujar estilo paint
+- Calculadra - Aplicación móvil donde tenemos una calculadora de impuestos permitiendo guardar las operaciones, cambiar la divisa y incluso puedes conectar una api externa para calcular en base a dicha divisa.
+- Forestgreen - Aplicación tipo whatsapp conectada al servidor de Jose Vicente.
